@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import SectionWrapper from "./components/SectionWrapper/SectionWrapper";
 import SearchBarContainer from "./containers/SearchBarContainer/SearchBarContainer";
 
 class App extends Component {
@@ -9,7 +10,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <SearchBarContainer />
+        <SectionWrapper>
+          <SearchBarContainer />
+        </SectionWrapper>
       </div>
     );
   }
