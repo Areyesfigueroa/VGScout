@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <SectionWrapper>
-          <SearchBarContainer suggestionCount={3} />
+          <SearchBarContainer suggestionCount={5} />
         </SectionWrapper>
       </div>
     );
