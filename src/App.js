@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import SectionWrapper from "./components/SectionWrapper/SectionWrapper";
-import SearchBarContainer from "./containers/SearchBarContainer/SearchBarContainer";
+import SearchBarContainer from "./containers/SearchBarContainers/SearchBarContainer";
 
 class App extends Component {
 
@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <SectionWrapper>
-          <SearchBarContainer />
+          <SearchBarContainer suggestions={true}/>
         </SectionWrapper>
       </div>
     );
