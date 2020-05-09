@@ -11,9 +11,17 @@ class SearchBarContainer extends Component {
         prevSelection: '',
         selection: null,
         suggestions: null,
+        suggestionCount: false
     }
 
     searchInput = React.createRef();
+
+    componentDidUpdate(prevProps, prevState) {
+        //if there is a new value and the new value is empty
+        if(this.state.searchValue != prevState.searchValue && this.state.searchValue.length <=0) {
+            this.setState({ suggestions: null });
+        }
+    }
 
     handleSelection = () => {
         if (this.state.selection !== '' && this.state.selection !== this.state.prevSelection) {
@@ -26,18 +34,23 @@ class SearchBarContainer extends Component {
     }
     
     handleSearch = (newSearchValue) => {
-        if(newSearchValue.length <= 0) {
-            //Empty
-            this.setState({ suggestions: null});
-        } else {
+        if(newSearchValue.length > 0) {
             //New Value
-            axios.get(`/games?search=${newSearchValue}&page_size=${5}`).
+            //cap at 5 suggestions
+            let suggestionCount = this.props.suggestionCount > 5 ? 5:this.props.suggestionCount; 
+            
+            //API Query
+            axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
             then(response => {
-                console.log(response.data.results);
-                this.setState({ 
-                    suggestions: response.data.results,
-                    selection: response.data.results[0]
-                });
+                if(this.state.searchValue.length > 0) {
+                    let results = response.data.results;
+                    console.log(results);
+                    
+                    this.setState({ 
+                        suggestions: results.length > 0 ? results:null,
+                        selection: results.length > 0 ? results[0]:null
+                    });
+                } 
             }).catch(error => {
                 console.log("Error: " + error);
             });
@@ -66,7 +79,7 @@ class SearchBarContainer extends Component {
             select={this.handleSelection}
             clear={this.clearSearch}
             showCancelBtn={this.state.searchValue.length > 0}
-            suggestions={this.props.suggestions ? this.state.suggestions:null} />
+            suggestions={this.props.suggestionCount ? this.state.suggestions:null} />
         );
     }
 

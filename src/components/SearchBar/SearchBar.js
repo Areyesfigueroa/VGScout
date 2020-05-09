@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./SearchBar.module.css";
-import SuggestionsContainer from "../../containers/SearchBarContainers/SuggestionsContainer/SuggestionsContainer";
+import SuggestionsBox from "./SuggestionsBox/SuggestionsBox";
 
 const searchBar = (props) => {
 
@@ -29,7 +29,9 @@ const searchBar = (props) => {
             </button>
 
             {/* If suggestions are passed then enable them. */}
-            {props.suggestions ? (<SuggestionsContainer data={props.suggestions}/>):null}
+            {props.suggestions ? (<SuggestionsBox data={props.suggestions}/>):null}
+            {/* TESTING USE THE LINE ABOVE */}
+            {/* <SuggestionsBoxContainer data={props.suggestions}/> */}
             
         </div>
     );
