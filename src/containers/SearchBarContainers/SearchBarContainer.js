@@ -15,7 +15,8 @@ class SearchBarContainer extends Component {
     }
 
     searchInput = React.createRef();
-
+    timerID = null;
+    
     componentDidUpdate(prevProps, prevState) {
         //if there is a new value and the new value is empty
         if(this.state.searchValue != prevState.searchValue && this.state.searchValue.length <=0) {
@@ -34,28 +35,38 @@ class SearchBarContainer extends Component {
     }
     
     handleSearch = (newSearchValue) => {
-        if(newSearchValue.length > 0) {
-            //New Value
-            //cap at 5 suggestions
-            let suggestionCount = this.props.suggestionCount > 5 ? 5:this.props.suggestionCount; 
-            
-            //API Query
-            axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
-            then(response => {
-                if(this.state.searchValue.length > 0) {
-                    let results = response.data.results;
-                    console.log(results);
-                    
-                    this.setState({ 
-                        suggestions: results.length > 0 ? results:null,
-                        selection: results.length > 0 ? results[0]:null
-                    });
-                } 
-            }).catch(error => {
-                console.log("Error: " + error);
-            });
-        }
-        this.setState({ searchValue: newSearchValue });
+
+        if(this.timerID) {
+            clearTimeout(this.timerID);
+            this.timerID = null;
+            console.log("Stop Timer");
+        } 
+
+        this.timerID = setTimeout(() => {
+            console.log("Load Data");
+            if(newSearchValue.length > 0) {
+                //New Value
+                //cap at 5 suggestions
+                let suggestionCount = this.props.suggestionCount > 5 ? 5:this.props.suggestionCount; 
+    
+                //API Query
+                axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
+                then(response => {
+                    if(this.state.searchValue.length > 0) {
+                        let results = response.data.results;
+                        console.log(results);
+                        
+                        this.setState({ 
+                            suggestions: results.length > 0 ? results:null,
+                            selection: results.length > 0 ? results[0]:null
+                        });
+                    } 
+                }).catch(error => {
+                    console.log("Error: " + error);
+                });
+            }
+            this.setState({ searchValue: newSearchValue });
+        }, this.props.searchDelay * 1000); 
     }
 
     parseSearch = (searchValue) => {
