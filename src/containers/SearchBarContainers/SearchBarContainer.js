@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import axios from "../../axios";
@@ -18,66 +18,63 @@ class SearchBarContainer extends Component {
     timerID = null;
     
     componentDidUpdate(prevProps, prevState) {
-        //if there is a new value and the new value is empty
-        if(this.state.searchValue != prevState.searchValue && this.state.searchValue.length <=0) {
+        //Takes care of removing the suggestions box if the search bar is empty.
+        if(this.state.searchValue !== prevState.searchValue && this.state.searchValue.length <=0) {
             this.setState({ suggestions: null });
         }
     }
 
-    handleSelection = () => {
-        if (this.state.selection !== '' && this.state.selection !== this.state.prevSelection) {
-            const selection = this.state.selection;
-            this.setState({prevSelection: selection});
-            
-            //Set the props for the selected game here. 
-            console.log(selection);
-        }
+    //Updates the suggestion of what the user selects
+    handleSelection = (selectionIdx) => {
+        let result = this.state.suggestions[selectionIdx];
+        this.searchInput.current.value = result.name;
+        this.setState({
+            selection: result,
+        });
     }
     
+    //Handles suggestions and selects the first suggestion as the selection.
     handleSearch = (newSearchValue) => {
 
         if(this.timerID) {
             clearTimeout(this.timerID);
             this.timerID = null;
-            console.log("Stop Timer");
         } 
 
         this.timerID = setTimeout(() => {
             console.log("Load Data");
             if(newSearchValue.length > 0) {
-                //New Value
-                //cap at 5 suggestions
                 let suggestionCount = this.props.suggestionCount > 5 ? 5:this.props.suggestionCount; 
-    
-                //API Query
-                axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
-                then(response => {
-                    if(this.state.searchValue.length > 0) {
-                        let results = response.data.results;
-                        console.log(results);
-                        
-                        this.setState({ 
-                            suggestions: results.length > 0 ? results:null,
-                            selection: results.length > 0 ? results[0]:null
-                        });
-                    } 
-                }).catch(error => {
-                    console.log("Error: " + error);
-                });
+                this.search(newSearchValue, suggestionCount);
             }
             this.setState({ searchValue: newSearchValue });
         }, this.props.searchDelay * 1000); 
     }
 
-    parseSearch = (searchValue) => {
-        return searchValue.trim().replace(/\s/gmi, '-').toLowerCase();
-    }
-
+    //Clear search textbox
     clearSearch = () => {
         this.searchInput.current.value = "";
         this.setState({
             searchValue: "",
             suggestions: null
+        });
+    }
+
+    //Query search
+    search = (newSearchValue, suggestionCount) => {
+        //API Query
+        axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
+        then(response => {
+            if(this.state.searchValue.length > 0) {
+                let results = response.data.results;
+                
+                this.setState({ 
+                    suggestions: results.length > 0 ? results:null,
+                    selection: results.length > 0 ? results[0]:null
+                });
+            } 
+        }).catch(error => {
+            console.log("Error: " + error);
         });
     }
 

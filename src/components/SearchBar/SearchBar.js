@@ -13,11 +13,11 @@ const searchBar = (props) => {
                 placeholder="Search..."
                 id="search"
                 onChange={(event) => props.search(event.target.value)} 
-                onKeyUp={(event) => event.keyCode===13 ? props.select():null}/>
+                onKeyUp={(event) => event.keyCode===13 ? props.select(0):null}/>
 
             <button 
             className={classes.searchButton} 
-            onClick={props.select}>
+            onClick={()=>props.select(0)}>
                 <ion-icon name="search-outline"></ion-icon>
             </button>
 
@@ -29,7 +29,7 @@ const searchBar = (props) => {
             </button>
 
             {/* If suggestions are passed then enable them. */}
-            {props.suggestions ? (<SuggestionsBox data={props.suggestions}/>):null}
+            {props.suggestions ? (<SuggestionsBox data={props.suggestions} clicked={props.select}/>):null}
             {/* TESTING USE THE LINE ABOVE */}
             {/* <SuggestionsBoxContainer data={props.suggestions}/> */}
             

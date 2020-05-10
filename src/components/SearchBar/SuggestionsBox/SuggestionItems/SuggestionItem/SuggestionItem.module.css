@@ -7,6 +7,16 @@
     height: 60px;
     text-align: left;
     align-items: center;
+    border-radius: 5px;
+}
+
+.SuggestionItem:hover,
+.SuggestionItem:active {
+    background-color: cadetblue;
+}
+
+.active {
+    background-color: cadetblue;
 }
 
 .SuggestionItem img {
