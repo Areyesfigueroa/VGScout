@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import SearchBar from '../../components/SearchBar/SearchBar';
+import SuggestionsBoxContainer from './SuggestionBoxContainer';
 import axios from "../../axios";
 
 class SearchBarContainer extends Component {
@@ -10,8 +11,7 @@ class SearchBarContainer extends Component {
         prevSearchValue: '',
         prevSelection: '',
         selection: null,
-        suggestions: null,
-        suggestionCount: false
+        suggestions: null
     }
 
     searchInput = React.createRef();
@@ -44,8 +44,7 @@ class SearchBarContainer extends Component {
         this.timerID = setTimeout(() => {
             console.log("Load Data");
             if(newSearchValue.length > 0) {
-                let suggestionCount = this.props.suggestionCount > 5 ? 5:this.props.suggestionCount; 
-                this.search(newSearchValue, suggestionCount);
+                this.search(newSearchValue);
             }
             this.setState({ searchValue: newSearchValue });
         }, this.props.searchDelay * 1000); 
@@ -61,13 +60,22 @@ class SearchBarContainer extends Component {
     }
 
     //Query search
-    search = (newSearchValue, suggestionCount) => {
+    search = (newSearchValue) => {
+        const maxSuggestionCount = 5, minSuggestionCount = 1;
+        let suggestionCount = this.props.suggestionCount;
+        
+        if(this.props.suggestionCount > maxSuggestionCount) {
+            suggestionCount = 5;
+        } else if(this.props.suggestionCount < minSuggestionCount) {
+            suggestionCount = 1;
+        }
+
         //API Query
         axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
         then(response => {
             if(this.state.searchValue.length > 0) {
                 let results = response.data.results;
-                
+                console.log(results);
                 this.setState({ 
                     suggestions: results.length > 0 ? results:null,
                     selection: results.length > 0 ? results[0]:null
@@ -81,16 +89,22 @@ class SearchBarContainer extends Component {
     render() {
 
         return (
-            <SearchBar 
-            searchRef={this.searchInput}
-            search={this.handleSearch} 
-            select={this.handleSelection}
-            clear={this.clearSearch}
-            showCancelBtn={this.state.searchValue.length > 0}
-            suggestions={this.props.suggestionCount ? this.state.suggestions:null} />
+            <div>
+                <SearchBar 
+                searchRef={this.searchInput}
+                search={this.handleSearch} 
+                select={this.confirmSelection}
+                clear={this.clearSearch}
+                showCancelBtn={this.state.searchValue.length > 0}
+                suggestions={this.state.suggestions ? this.state.suggestions:null} />
+                
+                {this.state.suggestions ? 
+                <SuggestionsBoxContainer 
+                data={this.state.suggestions}
+                searchInput={this.searchInput} /> : null}
+            </div>
         );
     }
-
 }
 
 export default SearchBarContainer;

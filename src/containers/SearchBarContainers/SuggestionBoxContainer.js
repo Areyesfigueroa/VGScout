@@ -1,20 +1,72 @@
-import React from "react";
-import SuggestionsBox from "../../components/SearchBar/SuggestionsBox/SuggestionsBox";
+import React, { Component } from "react";
+import SuggestionsBox from "../../components/SuggestionsBox/SuggestionsBox";
 
 class SuggestionsBoxContainer extends Component {
 
     state = {
-        selection: null
+        selectedID: 0
+    }
+    
+    componentDidMount() {
+        this.props.searchInput.current.addEventListener("keydown", this.navArrowSelection);
     }
 
+    componentWillUnmount() {
+        this.props.searchInput.current.removeEventListener("keydown", this.navArrowSelection);
+    }
 
-    handleSelection = (selectionIdx) => {
-        
+    navArrowSelection = (event) => {
+
+        let id = this.state.selectedID;
+
+        //When enter is pressed.
+
+        if(event.keyCode === 38) {            
+            //Arrow up
+            id = ((id-1) < 0) ? id:id-1;  
+            this.setState({ selectedID: id });
+        }
+
+        if(event.keyCode === 40) {
+            //Arrow down
+            id = ((id+1) > this.props.data.length - 1) ? id:id + 1;  
+            this.setState({ selectedID: id });
+        }
+    }
+
+    navClickSelection = (event) => {
+        if(!event.target) {
+            return;
+        }
+
+        let id = parseInt(event.target.closest("div").id);
+        this.setState({
+            selectedID: id
+        })
+    }
+
+    //Handle the hightlighted selection.
+    styleSelection = (id) => {
+        if(this.state.selectedID === id){
+            return { 
+                backgroundColor: "rgba(128, 205, 250, 0.5)",
+                fontWeight: "bold" 
+            };
+        } else {
+            return {
+                backgroundColor: "white"
+            }
+        }
     }
 
     render() {
         return (
-            <SuggestionsBox data={props.suggestions} clicked={props.select} />
+            <SuggestionsBox 
+            data={this.props.data} 
+            suggestionBoxRef={this.suggestionBoxRef} 
+            styleSelection={this.styleSelection}
+            clicked={this.navClickSelection}
+            />
         )
     }
 }

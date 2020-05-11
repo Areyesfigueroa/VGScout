@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./SearchBar.module.css";
-import SuggestionsBox from "./SuggestionsBox/SuggestionsBox";
 
 const searchBar = (props) => {
 
@@ -13,7 +12,7 @@ const searchBar = (props) => {
                 placeholder="Search..."
                 id="search"
                 onChange={(event) => props.search(event.target.value)} 
-                onKeyUp={(event) => event.keyCode===13 ? props.select(0):null}/>
+                onKeyUp={(event) => event.key==='Enter' ? props.select(0):null}/>
 
             <button 
             className={classes.searchButton} 
@@ -27,12 +26,6 @@ const searchBar = (props) => {
             style={{visibility: props.showCancelBtn ? "visible":"hidden"}}>
                 <ion-icon name="close-circle-outline"></ion-icon>
             </button>
-
-            {/* If suggestions are passed then enable them. */}
-            {props.suggestions ? (<SuggestionsBox data={props.suggestions} clicked={props.select}/>):null}
-            {/* TESTING USE THE LINE ABOVE */}
-            {/* <SuggestionsBoxContainer data={props.suggestions}/> */}
-            
         </div>
     );
 }
