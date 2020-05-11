@@ -9,7 +9,8 @@ const suggestionsBox = (props) => {
         <SuggestionItems 
         data={props.data} 
         clicked={props.clicked} 
-        styleSelection={props.styleSelection}/>
+        styleSelection={props.styleSelection}
+        navSelection={props.navSelection}/>
     </div>
 )};
 

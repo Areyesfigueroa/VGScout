@@ -16,15 +16,16 @@ class SuggestionsBoxContainer extends Component {
     }
 
     navArrowSelection = (event) => {
+        if(!event.target.closest("div")) return;
 
         let id = this.state.selectedID;
-
         //When enter is pressed.
 
         if(event.keyCode === 38) {            
             //Arrow up
             id = ((id-1) < 0) ? id:id-1;  
             this.setState({ selectedID: id });
+
         }
 
         if(event.keyCode === 40) {
@@ -35,14 +36,8 @@ class SuggestionsBoxContainer extends Component {
     }
 
     navClickSelection = (event) => {
-        if(!event.target) {
-            return;
-        }
-
-        let id = parseInt(event.target.closest("div").id);
-        this.setState({
-            selectedID: id
-        })
+        if(!event.target) return;
+        this.setState({ selectedID: parseInt(event.target.closest("div").id) });
     }
 
     //Handle the hightlighted selection.
@@ -63,8 +58,9 @@ class SuggestionsBoxContainer extends Component {
         return (
             <SuggestionsBox 
             data={this.props.data} 
-            suggestionBoxRef={this.suggestionBoxRef} 
+            // suggestionBoxRef={this.suggestionBoxRef} 
             styleSelection={this.styleSelection}
+            navSelection={this.navArrowSelection}
             clicked={this.navClickSelection}
             />
         )
