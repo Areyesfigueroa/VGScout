@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SuggestionsBoxContainer from './SuggestionBoxContainer';
-import axios from "../../axios";
+import { fetchData } from "../../rawgAPI";
 
 class SearchBarContainer extends Component {
 
@@ -16,7 +16,7 @@ class SearchBarContainer extends Component {
 
     searchInput = React.createRef();
     timerID = null;
-    
+
     componentDidUpdate(prevProps, prevState) {
         //Takes care of removing the suggestions box if the search bar is empty.
         if(this.state.searchValue !== prevState.searchValue && this.state.searchValue.length <=0) {
@@ -59,23 +59,22 @@ class SearchBarContainer extends Component {
         });
     }
 
+    suggestionThresholdHandler(min, max) {
+        if(this.props.suggestionCount > max) return max;
+        if(this.props.suggestionCount < min) return min;
+
+        return this.props.suggestionCount;
+    }
+
     //Query search
     search = (newSearchValue) => {
-        const maxSuggestionCount = 5, minSuggestionCount = 1;
-        let suggestionCount = this.props.suggestionCount;
-        
-        if(this.props.suggestionCount > maxSuggestionCount) {
-            suggestionCount = 5;
-        } else if(this.props.suggestionCount < minSuggestionCount) {
-            suggestionCount = 1;
-        }
+        let suggestionCount = this.suggestionThresholdHandler(1, 5);
 
         //API Query
-        axios.get(`/games?search=${newSearchValue}&page_size=${suggestionCount}`).
-        then(response => {
+        fetchData(newSearchValue, suggestionCount).
+        then(data => {
             if(this.state.searchValue.length > 0) {
-                let results = response.data.results;
-                console.log(results);
+                let results = data.results;
                 this.setState({ 
                     suggestions: results.length > 0 ? results:null,
                     selection: results.length > 0 ? results[0]:null

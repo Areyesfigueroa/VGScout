@@ -58,7 +58,6 @@ class SuggestionsBoxContainer extends Component {
         return (
             <SuggestionsBox 
             data={this.props.data} 
-            // suggestionBoxRef={this.suggestionBoxRef} 
             styleSelection={this.styleSelection}
             navSelection={this.navArrowSelection}
             clicked={this.navClickSelection}
