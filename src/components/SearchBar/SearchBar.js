@@ -11,12 +11,11 @@ const searchBar = (props) => {
                 type="search"
                 placeholder="Search..."
                 id="search"
-                onChange={(event) => props.search(event.target.value)} 
-                onKeyUp={(event) => event.key==='Enter' ? props.select(0):null}/>
+                onChange={(event) => props.search(event.target.value)}/>
 
             <button 
             className={classes.searchButton} 
-            onClick={()=>props.select(0)}>
+            onClick={props.select}>
                 <ion-icon name="search-outline"></ion-icon>
             </button>
 

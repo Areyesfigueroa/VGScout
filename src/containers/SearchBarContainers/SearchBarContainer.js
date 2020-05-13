@@ -24,13 +24,20 @@ class SearchBarContainer extends Component {
         }
     }
 
-    //Updates the suggestion of what the user selects
-    handleSelection = (selectionIdx) => {
+    //display the suggestion of what the user selects
+    displaySelection = (selectionIdx) => {
         let result = this.state.suggestions[selectionIdx];
         this.searchInput.current.value = result.name;
         this.setState({
             selection: result,
         });
+    }
+
+    confirmSelection = () => {
+        if(!this.state.selection) return;
+
+        console.log(this.state.selection);
+        this.setState({ suggestions: null });
     }
     
     //Handles suggestions and selects the first suggestion as the selection.
@@ -88,7 +95,7 @@ class SearchBarContainer extends Component {
     render() {
 
         return (
-            <div>
+            <div onKeyDown={(event) => event.key === 'Enter' ? this.confirmSelection():null}>
                 <SearchBar 
                 searchRef={this.searchInput}
                 search={this.handleSearch} 
@@ -100,7 +107,8 @@ class SearchBarContainer extends Component {
                 {this.state.suggestions ? 
                 <SuggestionsBoxContainer 
                 data={this.state.suggestions}
-                searchInput={this.searchInput} /> : null}
+                searchInput={this.searchInput}
+                updateSelection={this.displaySelection} /> : null}
             </div>
         );
     }

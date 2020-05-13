@@ -15,6 +15,12 @@ class SuggestionsBoxContainer extends Component {
         this.props.searchInput.current.removeEventListener("keydown", this.navArrowSelection);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.selectedID !== this.state.selectedID) {
+            this.props.updateSelection(this.state.selectedID);
+        }
+    }
+
     navArrowSelection = (event) => {
         if(!event.target.closest("div")) return;
 
