@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import SuggestionsBoxContainer from './SuggestionBoxContainer';
-import { fetchData } from "../../rawgAPI";
+import SuggestionsBoxContainer from '../SuggestionBoxContainer/SuggestionBoxContainer';
+import { loadSuggestions, addDelay } from "../../utils";
+
 
 class SearchBarContainer extends Component {
 
@@ -17,19 +18,24 @@ class SearchBarContainer extends Component {
     searchInput = React.createRef();
     timerID = null;
 
+
+    myFunc = (value) => {
+        console.log(value);
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        //Takes care of removing the suggestions box if the search bar is empty.
-        if(this.state.searchValue !== prevState.searchValue && this.state.searchValue.length <=0) {
-            this.setState({ suggestions: null });
+        if(this.state.searchValue !== prevState.searchValue) {
+            this.search();
         }
     }
 
-    //display the suggestion of what the user selects
     displaySelection = (selectionIdx) => {
+        if(!this.state.suggestions) return;
+
         let result = this.state.suggestions[selectionIdx];
         this.searchInput.current.value = result.name;
         this.setState({
-            selection: result,
+            selection: result
         });
     }
 
@@ -39,25 +45,14 @@ class SearchBarContainer extends Component {
         console.log(this.state.selection);
         this.setState({ suggestions: null });
     }
-    
-    //Handles suggestions and selects the first suggestion as the selection.
+
     handleSearch = (newSearchValue) => {
-
-        if(this.timerID) {
-            clearTimeout(this.timerID);
-            this.timerID = null;
-        } 
-
-        this.timerID = setTimeout(() => {
-            console.log("Load Data");
-            if(newSearchValue.length > 0) {
-                this.search(newSearchValue);
-            }
-            this.setState({ searchValue: newSearchValue });
-        }, this.props.searchDelay * 1000); 
+       const callback = () => this.setState({ searchValue: newSearchValue });
+       const delayTime = this.props.searchDelay * 1000;
+       
+       this.timerID = addDelay(delayTime, callback, this.timerID);
     }
 
-    //Clear search textbox
     clearSearch = () => {
         this.searchInput.current.value = "";
         this.setState({
@@ -66,7 +61,7 @@ class SearchBarContainer extends Component {
         });
     }
 
-    suggestionThresholdHandler(min, max) {
+    getSuggestionCount(min, max) {
         if(this.props.suggestionCount > max) return max;
         if(this.props.suggestionCount < min) return min;
 
@@ -74,22 +69,26 @@ class SearchBarContainer extends Component {
     }
 
     //Query search
-    search = (newSearchValue) => {
-        let suggestionCount = this.suggestionThresholdHandler(1, 5);
+    search = () => {
 
-        //API Query
-        fetchData(newSearchValue, suggestionCount).
-        then(data => {
-            if(this.state.searchValue.length > 0) {
-                let results = data.results;
+        if(this.state.searchValue.length > 0) {
+            //API Query
+            loadSuggestions(this.state.searchValue, this.getSuggestionCount(1, 5)).
+            then(results => {
                 this.setState({ 
                     suggestions: results.length > 0 ? results:null,
                     selection: results.length > 0 ? results[0]:null
                 });
-            } 
-        }).catch(error => {
-            console.log("Error: " + error);
-        });
+            }).catch(error => {
+                console.log("Error: " + error);
+            });
+        } else {
+            this.setState({
+                suggestions: null,
+                selection: null
+            });
+        }
+
     }
 
     render() {

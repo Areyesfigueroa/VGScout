@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component Match Snapshot 1`] = `
+<div
+  className="App"
+>
+  <section
+    className="SectionWrapper"
+    data-testid="sectionWrapper"
+  >
+    <div
+      onKeyDown={[Function]}
+    >
+      <div
+        className="SearchBar"
+        data-testid="searchBar"
+      >
+        <input
+          className="defaultSearch"
+          id="search"
+          onChange={[Function]}
+          placeholder="Search..."
+          type="search"
+        />
+        <button
+          className="searchButton"
+          onClick={[Function]}
+        >
+          <ion-icon
+            name="search-outline"
+          />
+        </button>
+        <button
+          className="cancelButton"
+          onClick={[Function]}
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
+        >
+          <ion-icon
+            name="close-circle-outline"
+          />
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+`;

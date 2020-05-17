@@ -4,7 +4,7 @@ import classes from "./SearchBar.module.css";
 const searchBar = (props) => {
 
     return (
-        <div className={classes.SearchBar}>
+        <div data-testid="searchBar" className={classes.SearchBar}>
             <input
                 className={props.suggestions ? classes.collapseSearch: classes.defaultSearch}
                 ref={props.searchRef}
