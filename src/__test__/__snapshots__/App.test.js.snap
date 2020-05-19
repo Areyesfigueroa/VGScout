@@ -4,6 +4,22 @@ exports[`App Component Match Snapshot 1`] = `
 <div
   className="App"
 >
+  <div
+    className="ShadowBox"
+    style={
+      Object {
+        "background": "linear-gradient(0, rgba(0,0,0,0.2), rgba(0,0,0,0.9))",
+      }
+    }
+  />
+  <div
+    className="Background"
+  >
+    <img
+      alt="Default Background background"
+      src="background-default.png"
+    />
+  </div>
   <section
     className="SectionWrapper"
     data-testid="sectionWrapper"

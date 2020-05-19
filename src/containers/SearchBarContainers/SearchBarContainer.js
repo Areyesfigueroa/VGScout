@@ -18,11 +18,6 @@ class SearchBarContainer extends Component {
     searchInput = React.createRef();
     timerID = null;
 
-
-    myFunc = (value) => {
-        console.log(value);
-    }
-
     componentDidUpdate(prevProps, prevState) {
         if(this.state.searchValue !== prevState.searchValue) {
             this.search();
@@ -42,7 +37,8 @@ class SearchBarContainer extends Component {
     confirmSelection = () => {
         if(!this.state.selection) return;
 
-        console.log(this.state.selection);
+        //console.log(this.state.selection);
+        this.props.selectedValue(this.state.selection);
         this.setState({ suggestions: null });
     }
 
