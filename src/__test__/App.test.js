@@ -17,11 +17,4 @@ describe("App Component", () => {
     render(<App />, div);
   });
 
-  it("Match Snapshot", () => {
-    const component = renderer.create(<App />);
-
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  })
-
 })
