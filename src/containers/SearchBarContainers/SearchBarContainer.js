@@ -37,7 +37,7 @@ class SearchBarContainer extends Component {
     confirmSelection = () => {
         if(!this.state.selection) return;
 
-        //console.log(this.state.selection);
+        console.log(this.state.selection);
         this.props.selectedValue(this.state.selection);
         this.setState({ suggestions: null });
     }
@@ -90,7 +90,9 @@ class SearchBarContainer extends Component {
     render() {
 
         return (
-            <div onKeyDown={(event) => event.key === 'Enter' ? this.confirmSelection():null}>
+            <div onKeyDown={(event) => event.key === 'Enter' ? this.confirmSelection():null}
+            // onMouseDown={(event) => event.button === 0 ? this.confirmSelection():null}
+            >
                 <SearchBar 
                 searchRef={this.searchInput}
                 search={this.handleSearch} 
@@ -103,7 +105,8 @@ class SearchBarContainer extends Component {
                 <SuggestionsBoxContainer 
                 data={this.state.suggestions}
                 searchInput={this.searchInput}
-                updateSelection={this.displaySelection} /> : null}
+                updateSelection={this.displaySelection}
+                confirmSelection={this.confirmSelection} /> : null}
             </div>
         );
     }
