@@ -6,6 +6,7 @@ import SearchBarContainer from "./containers/SearchBarContainers/SearchBarContai
 import Background from "./components/Background/Background";
 import ShadowBoxGradient from "./components/ShadowBoxGradient/ShadowBoxGradient";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer";
+import Ratings from "./components/Ratings/Ratings";
 
 class App extends Component {
 
@@ -48,6 +49,8 @@ class App extends Component {
           videoId={this.state.selectedValue.clip ? this.state.selectedValue.clip.video:null}
           />
           {/* Ratings */}
+          <Ratings />
+
         </SectionWrapper>
 
         // Game Information
