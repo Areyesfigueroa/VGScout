@@ -1,0 +1,31 @@
+.Summary {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-bottom: 0;
+}
+
+.textContainer {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.Summary button {
+    font-size: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    outline: none;
+    color: #4a87ff;
+}
+
+.expand {
+    height: auto;
+}
+
+.collapse {
+    height: 200px;
+}
