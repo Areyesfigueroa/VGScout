@@ -1,0 +1,17 @@
+.InfoBox {
+    width: 50%;
+    height: 80px;
+    padding: 0;
+    margin: 0;
+}
+
+.InfoBox h4 {
+    margin: 10px 0;
+}
+
+.InfoBox ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+}

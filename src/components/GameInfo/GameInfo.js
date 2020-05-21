@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./GameInfo.module.css";
 
 import SummaryContainer from '../../containers/SummaryContainer/SummaryContainer';
+import InfoBox from "./InfoBox/InfoBox";
 
 const gameInfo = (props) => {
 
@@ -11,11 +12,13 @@ const gameInfo = (props) => {
             <SummaryContainer>
                 {props.summary}
             </SummaryContainer>
-            {/* Developer/Publisher section
 
-            Platform Section
-
-            Genre Section */}
+            <div className={classes.InfoBoxContainer}>
+                <InfoBox title="Developers:" data={props.developers}/>
+                <InfoBox title="Publishers:" data={props.publishers}/>
+                <InfoBox title="Platforms:" data={props.platforms}/>
+                <InfoBox title="Genres:" data={props.genres}/>
+            </div>
         </div>
     )
 };
