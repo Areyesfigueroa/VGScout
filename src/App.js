@@ -49,11 +49,16 @@ class App extends Component {
           videoId={this.state.selectedValue.clip ? this.state.selectedValue.clip.video:null}
           />
           {/* Ratings */}
-          <Ratings />
+          <Ratings
+          metacritic={this.state.selectedValue.metacritic}
+          ign={8}
+          gamespot={4.5}
+           />
 
         </SectionWrapper>
 
         // Game Information
+        
         // Comments from Meta critic
         }
 
