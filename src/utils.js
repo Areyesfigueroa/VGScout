@@ -1,4 +1,4 @@
-import { fetchGameDetails, queryGameData } from './http';
+import { fetchData, fetchGameDetails, queryGameData } from './http';
 
 const loadSuggestions = (query, length) => {
     return queryGameData(query, length).then(response => {  
@@ -16,6 +16,15 @@ const loadGameDetails = (id) => {
     })
 }
 
+const loadExperiment = () => {
+    return fetchData().then(response => {  
+        console.log(response);
+        //return response;
+    }).catch((error) => {
+        return error;
+    })
+}
+
 const addDelay = (delayTime, callback, timerID=null) => {
     if(timerID) {
         clearTimeout(timerID);
@@ -24,6 +33,6 @@ const addDelay = (delayTime, callback, timerID=null) => {
     return setTimeout(callback, delayTime);
 }
 
-export { loadSuggestions, loadGameDetails, addDelay };
+export { loadSuggestions, loadGameDetails, addDelay, loadExperiment };
 
 

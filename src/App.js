@@ -10,7 +10,7 @@ import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
 //TESTING
-import { loadGameDetails } from "./utils";
+import { loadGameDetails, loadExperiment } from "./utils";
 
 class App extends Component {
 
@@ -19,6 +19,10 @@ class App extends Component {
   }
 
   clips = null;
+
+  componentDidMount() {
+    loadExperiment();
+  }
 
   handleSelectedValue = (newValue) => {
     loadGameDetails(newValue.id).then(data => {
