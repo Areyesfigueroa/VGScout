@@ -1,0 +1,50 @@
+.RedditPost {
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.RedditPost button {
+    font-size: 100%;
+    padding: 10px;
+}
+
+.RedditPost hr {
+    width: 100%;
+}
+
+.RedditPost p,
+.RedditPost a {
+    padding: 2px 10px;
+    margin:0;
+}
+
+.postContent {
+    overflow: hidden;
+}
+
+.collapse {
+    height: 50px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.postInfo, 
+.fullPostLink {
+    width: 50%;
+}
+
+.fullPostLink {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.postContent {
+    text-align: left;
+}

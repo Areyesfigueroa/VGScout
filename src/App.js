@@ -10,6 +10,9 @@ import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
 //TESTING
+import RedditPost from "./components/RedditPost/RedditPost";
+
+//TESTING
 import { loadGameDetails, loadExperiment } from "./utils";
 
 class App extends Component {
@@ -95,6 +98,8 @@ class App extends Component {
            {/* Metacritic Comments */}
         </SectionWrapper>
 
+        {/* TESTING SECTION */}
+        <RedditPost />
       </div>
     );
   }
