@@ -9,6 +9,9 @@ import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer";
 import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
+//TESTING
+import { loadGameDetails } from "./utils";
+
 class App extends Component {
 
   state = {
@@ -17,44 +20,61 @@ class App extends Component {
 
   clips = null;
 
-  //TESTING, DELETE
-  componentDidUpdate(prevProps, prevState) {
-    if(this.state.selectedValue !== prevState.selectedValue) {
-      console.log(this.state.selectedValue);
-    }
+  handleSelectedValue = (newValue) => {
+    loadGameDetails(newValue.id).then(data => {
+      console.log(data);
+      this.setState({ selectedValue: data });
+    });
   }
 
-  handleSelectedValue = (newValue) => {
-    this.setState({ selectedValue: newValue });
-  }
 
   render() {
-    const tempSummary = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
-    const tempDevInfo = [      
-      {id: 0, name: "Naughty Dog"}
-    ];
+    //Default Values
+    let bgImage = require("./assets/background-default.png");
+    let youtubePlayer = null;
+    let ratings = null;
+    let gameInfo = null;
 
-    const tempPlatformInfo = [
-      {id: 0, name: "PlayStation 4"},
-      {id:1, name: "Xbox One"}
-    ];
+    const parsePlatformData = () => {
+      let platforms = this.state.selectedValue.platforms ? this.state.selectedValue.platforms: null;
+      return platforms ? platforms.map(platformObj => platformObj.platform) : null;
+    }
 
-    const tempGenreInfo = [
-      {id: 0, name: "Action Adventure"},
-      {id:1, name: "Action"}
-    ];
-    const tempPublisherInfo = [
-      {id: 0, name: "Sony"}
-    ];
+    //Once we have the game data loaded.
+    if(this.state.selectedValue !== null) {
+      let platformData = parsePlatformData();
+      bgImage = this.state.selectedValue.background_image;
 
+      youtubePlayer = (
+        <YoutubePlayer 
+        videoId={this.state.selectedValue.clip ? this.state.selectedValue.clip.video:null}
+        />
+      );
 
+      //TODO, Find replacements for IGN and gamespot.
+      ratings = (
+        <Ratings
+        metacritic={this.state.selectedValue.metacritic}
+        ign={8}
+        gamespot={4.5}
+         />
+      );
+
+      gameInfo = (
+        <GameInfo
+        summary={this.state.selectedValue.description}
+        developers={this.state.selectedValue.developers}
+        publishers={this.state.selectedValue.publishers}
+        platforms={platformData}
+        genres={this.state.selectedValue.genres}
+        />
+      );
+    }
 
     return (
       <div className="App">
         <ShadowBoxGradient degree={0} fromOpacity={0.2} toOpacity={0.9}/>
-        <Background value={this.state.selectedValue}/>
-
         <SectionWrapper>
           <SearchBarContainer 
           selectedValue={this.handleSelectedValue} 
@@ -63,31 +83,13 @@ class App extends Component {
         </SectionWrapper>
 
         {/* If there is a selection */}
-        {!this.state.selectedValue ? 
-        null
-        :
+        <Background image={bgImage}/>
         <SectionWrapper>
-          <YoutubePlayer 
-          videoId={this.state.selectedValue.clip ? this.state.selectedValue.clip.video:null}
-          />
-          {/* Ratings */}
-          <Ratings
-          metacritic={this.state.selectedValue.metacritic}
-          ign={8}
-          gamespot={4.5}
-           />
-           {/* Game Info */}
-            <GameInfo
-              summary={tempSummary}
-              developers={tempDevInfo}
-              publishers={tempPublisherInfo}
-              platforms={tempPlatformInfo}
-              genres={tempGenreInfo}
-            />
+          {youtubePlayer}
+          {ratings}
+          {gameInfo}
            {/* Metacritic Comments */}
-        </SectionWrapper>}
-
-
+        </SectionWrapper>
 
       </div>
     );

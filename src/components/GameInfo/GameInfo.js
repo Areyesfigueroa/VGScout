@@ -9,9 +9,7 @@ const gameInfo = (props) => {
 
     return (
         <div className={classes.GameInfo}>
-            <SummaryContainer>
-                {props.summary}
-            </SummaryContainer>
+            <SummaryContainer data={props.summary}/>
 
             <div className={classes.InfoBoxContainer}>
                 <InfoBox title="Developers:" data={props.developers}/>

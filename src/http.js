@@ -1,6 +1,17 @@
 import axios from './axios';
 
-const fetchData = (query, length) => {
+const fetchGameDetails = (id) => {
+
+    //API Query
+    return axios.get(`/games/${id}`).
+    then(response => {
+        return response.data;
+    }).catch(error => {
+        return error;
+    });
+}
+
+const queryGameData = (query, length) => {
 
     //API Query
     return axios.get(`/games?search=${query}&page_size=${length}`).
@@ -11,4 +22,5 @@ const fetchData = (query, length) => {
     });
 }
 
-export { fetchData };
+
+export { fetchGameDetails, queryGameData };

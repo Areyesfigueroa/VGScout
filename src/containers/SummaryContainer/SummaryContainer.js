@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Summary from '../../components/Summary/Summary';
+import Summary from '../../components/GameInfo/Summary/Summary';
 
 class SummaryContainer extends Component {
    
@@ -17,7 +17,7 @@ class SummaryContainer extends Component {
             <Summary 
             expand={this.state.expand} 
             clicked={this.toggleExpansion}
-            textContent={this.props.children} />
+            data={this.props.data} />
         );
     }
 };
