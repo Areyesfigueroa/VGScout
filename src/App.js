@@ -10,27 +10,36 @@ import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
 //TESTING
-import RedditPost from "./components/RedditPost/RedditPost";
+// import RedditPosts from "./components/RedditPosts/RedditPosts";
 
 //TESTING
-import { loadGameDetails, loadExperiment } from "./utils";
+import { loadGameDetails, loadRedditPosts } from "./utils";
 
 class App extends Component {
 
   state = {
-    selectedValue: null
+    selectedValue: null,
+    redditPostsData: null
   }
 
   clips = null;
 
   componentDidMount() {
-    loadExperiment();
+    // loadRedditPosts(5703).then(data => {
+    //   console.log(data);
+    // });
   }
 
   handleSelectedValue = (newValue) => {
-    loadGameDetails(newValue.id).then(data => {
-      console.log(data);
-      this.setState({ selectedValue: data });
+    loadGameDetails(newValue.id).then(gameData => {
+      loadRedditPosts(gameData.id).then(postData => {
+        console.log(gameData);
+        console.log(postData);
+        this.setState({ 
+          selectedValue: gameData,
+          redditPostsData: postData
+        });
+      });
     });
   }
 
@@ -99,7 +108,7 @@ class App extends Component {
         </SectionWrapper>
 
         {/* TESTING SECTION */}
-        <RedditPost />
+        {/* <RedditPosts /> */}
       </div>
     );
   }

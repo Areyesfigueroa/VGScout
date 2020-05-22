@@ -11,16 +11,18 @@ const fetchGameDetails = (id) => {
     });
 }
 
-const fetchData = () => {
+const fetchRedditPosts = (id) => {
 
     //API Query
-    return axios.get(`/games/5703/reddit`).
+    return axios.get(`/games/${id}/reddit`).
     then(response => {
         return response.data;
     }).catch(error => {
         return error;
     });
 }
+
+
 
 const queryGameData = (query, length) => {
 
@@ -34,4 +36,4 @@ const queryGameData = (query, length) => {
 }
 
 
-export { fetchGameDetails, queryGameData, fetchData };
+export { fetchGameDetails, queryGameData, fetchRedditPosts };

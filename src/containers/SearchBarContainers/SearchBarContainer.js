@@ -37,7 +37,6 @@ class SearchBarContainer extends Component {
     confirmSelection = () => {
         if(!this.state.selection) return;
 
-        console.log(this.state.selection);
         this.props.selectedValue(this.state.selection);
         this.setState({ suggestions: null });
     }
