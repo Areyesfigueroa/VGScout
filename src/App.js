@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import SectionWrapper from "./components/SectionWrapper/SectionWrapper";
 import SearchBarContainer from "./containers/SearchBarContainers/SearchBarContainer";
+import RedditPostsContainer from './containers/RedditPostsContainer/RedditPostsContainer';
+
+import SectionWrapper from "./components/SectionWrapper/SectionWrapper";
 import Background from "./components/Background/Background";
 import ShadowBoxGradient from "./components/ShadowBoxGradient/ShadowBoxGradient";
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer";
@@ -42,7 +44,6 @@ class App extends Component {
       });
     });
   }
-
 
   render() {
 
@@ -107,8 +108,10 @@ class App extends Component {
            {/* Metacritic Comments */}
         </SectionWrapper>
 
-        {/* TESTING SECTION */}
-        {/* <RedditPosts /> */}
+        {/* TESTING SECTION Reddit Posts */}
+        <SectionWrapper>
+          <RedditPostsContainer data={this.state.redditPostsData} />
+        </SectionWrapper>
       </div>
     );
   }

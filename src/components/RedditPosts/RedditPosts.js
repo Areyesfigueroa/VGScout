@@ -3,15 +3,17 @@ import RedditPost from './RedditPost/RedditPost';
 
 const redditPosts = (props) => {
     return props.posts.map((post) => {
-        <RedditPost 
+        return (<RedditPost 
         key={post.id}
-        date={post.date}
-        title={post.title}
+        date={post.created}
+        title={post.name}
         userName={post.username}
-        fullPostURL={post.fullPostURL}
-        content={post.content}
-        isCollapsed={post.collapsed}
-        />
+        fullPostURL={post.url}
+        content={post.text}
+
+        collapse={props.collapse}
+        clicked={props.clicked}
+        />)
     });
 };
 
