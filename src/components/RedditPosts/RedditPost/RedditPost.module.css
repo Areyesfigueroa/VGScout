@@ -1,32 +1,19 @@
+
+/* STRUCTURE SECTION */
 .RedditPost {
     display: flex;
     flex-direction: column;
     background-color: gray;
     width: 100%;
     box-sizing: border-box;
+    border-bottom: 2.5px solid black;
 }
 
-.RedditPost button {
-    font-size: 100%;
-    padding: 10px;
-}
-
-.RedditPost hr {
-    width: 100%;
-}
-
+/* HEADER SECTION */
 .RedditPost p,
 .RedditPost a {
     padding: 2px 10px;
-    margin:0;
-}
-
-.postContent {
-    overflow: hidden;
-}
-
-.collapse {
-    height: 50px;
+    margin: 0;
 }
 
 .header {
@@ -41,10 +28,40 @@
 
 .fullPostLink {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: flex-end;
 }
 
+/* TITLE SECTION */
+.RedditPost h4 {
+    text-align: center;
+}
+
+/* POST CONTENT SECTION */
 .postContent {
     text-align: left;
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.postContent img {
+    width: auto;
+    height: auto;
+}
+
+.postContent div{
+    box-sizing: border-box;
+    word-wrap: break-word;
+    width: 100%;
+    padding: 10px;
+}
+
+/* EXPAND BUTTON SECTION */
+.RedditPost button {
+    font-size: 100%;
+    padding: 10px;
+}
+
+.collapse {
+    height: 50px;
 }

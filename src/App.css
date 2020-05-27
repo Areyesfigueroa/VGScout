@@ -6,3 +6,15 @@
 html {
   background-color: rgba(0, 0, 0, 1);
 }
+
+.button {
+  width: auto;
+  height: auto;
+  background-color: gray;
+  text-align: center;
+  color: blue;
+}
+
+.button:hover {
+  cursor: pointer;
+}

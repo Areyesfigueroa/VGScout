@@ -9,10 +9,8 @@ const redditPosts = (props) => {
         title={post.name}
         userName={post.username}
         fullPostURL={post.url}
+        img={post.image}
         content={post.text}
-
-        collapse={props.collapse}
-        clicked={props.clicked}
         />)
     });
 };

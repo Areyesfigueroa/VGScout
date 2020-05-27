@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './RedditPost.module.css';
 
-const redditPost = (props) => {
-    return (
-        <div className={classes.RedditPost + " " + classes.column}>
-            <div className={classes.header}>
-                <div className={classes.postInfo}>
-                    <p>{props.date}</p>
-                    <p>{props.title}</p>
-                    <p>{props.userName}</p>
+class RedditPost extends Component {
+
+    state = {
+        collapse: true
+    }
+
+    toggleCollapse = () => {
+        let newValue = !this.state.collapse;
+        this.setState({ collapse: newValue });
+    }
+
+    render() {
+
+        return (
+            <div className={classes.RedditPost}>
+                <div className={classes.header}>
+                    <div className={classes.postInfo}>
+                        <p>{this.props.date}</p>
+                        <p>{this.props.userName}</p>
+                    </div>
+                    <div className={classes.fullPostLink}>
+                        <a href={this.props.fullPostURL}>View Full Post</a>
+                    </div>
                 </div>
-                <div className={classes.fullPostLink}>
-                    <a href={props.fullPostURL}>View Full Post</a>
+                <h4>{this.props.title}</h4>
+                <div className={`${classes.postContent} ${this.state.collapse ? classes.collapse:null}`}>
+                    {this.props.img ? <img src={this.props.img} alt="reddit image"/>:null}
+                    <div dangerouslySetInnerHTML={{__html: this.props.content}}></div>
                 </div>
+                <a className={"button"} onClick={this.toggleCollapse}>more</a>
             </div>
-            <hr />
-            <div className={classes.postContent + " " + classes.collapse}>
-                {props.content}
-            </div>
-            <button onClick={props.clicked}>more</button>
-        </div>
-    );
+        );
+    }
+        
 };
 
-export default redditPost;
+export default RedditPost;
