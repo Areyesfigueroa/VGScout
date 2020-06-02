@@ -1,0 +1,12 @@
+.RedditPostsHolder {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    background-color: rgba(0,0,0,.7);
+    color: white;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    box-sizing: border-box;
+}

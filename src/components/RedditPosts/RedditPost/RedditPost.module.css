@@ -3,17 +3,11 @@
 .RedditPost {
     display: flex;
     flex-direction: column;
-    background-color: gray;
     width: 100%;
     box-sizing: border-box;
-    border-bottom: 2.5px solid black;
-}
-
-/* HEADER SECTION */
-.RedditPost p,
-.RedditPost a {
+    border-bottom: 1px solid gray;
+    color: white;
     padding: 2px 10px;
-    margin: 0;
 }
 
 .header {
@@ -34,14 +28,14 @@
 
 /* TITLE SECTION */
 .RedditPost h4 {
-    text-align: center;
+    text-align: start;
 }
 
 /* POST CONTENT SECTION */
 .postContent {
     text-align: left;
     max-height: 300px;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .postContent img {
@@ -53,14 +47,10 @@
     box-sizing: border-box;
     word-wrap: break-word;
     width: 100%;
-    padding: 10px;
+    text-align: left;
 }
 
 /* EXPAND BUTTON SECTION */
-.RedditPost button {
-    font-size: 100%;
-    padding: 10px;
-}
 
 .collapse {
     height: 50px;

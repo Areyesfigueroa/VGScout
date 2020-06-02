@@ -10,9 +10,11 @@ html {
 .button {
   width: auto;
   height: auto;
-  background-color: gray;
+  background-color: none;
   text-align: center;
-  color: blue;
+  color: #4a87ff;
+  padding: 15px 0;
+  font-size: 100%;
 }
 
 .button:hover {

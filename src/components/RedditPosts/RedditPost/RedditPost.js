@@ -22,7 +22,7 @@ class RedditPost extends Component {
                         <p>{this.props.userName}</p>
                     </div>
                     <div className={classes.fullPostLink}>
-                        <a href={this.props.fullPostURL}>View Full Post</a>
+                        <a className="button" href={this.props.fullPostURL}>View Full Post</a>
                     </div>
                 </div>
                 <h4>{this.props.title}</h4>
@@ -30,7 +30,7 @@ class RedditPost extends Component {
                     {this.props.img ? <img src={this.props.img} alt="reddit image"/>:null}
                     <div dangerouslySetInnerHTML={{__html: this.props.content}}></div>
                 </div>
-                <a className={"button"} onClick={this.toggleCollapse}>more</a>
+                <a className={"button"} onClick={this.toggleCollapse}>{this.state.collapse ? "more":"less"}</a>
             </div>
         );
     }

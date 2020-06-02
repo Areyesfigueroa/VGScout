@@ -12,7 +12,7 @@ import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
 //TESTING
-// import RedditPosts from "./components/RedditPosts/RedditPosts";
+import RedditPostsHolder from "./components/RedditPostsHolder/RedditPostsHolder";
 
 //TESTING
 import { loadGameDetails, loadRedditPosts } from "./utils";
@@ -25,12 +25,6 @@ class App extends Component {
   }
 
   clips = null;
-
-  componentDidMount() {
-    // loadRedditPosts(5703).then(data => {
-    //   console.log(data);
-    // });
-  }
 
   handleSelectedValue = (newValue) => {
     loadGameDetails(newValue.id).then(gameData => {
@@ -105,12 +99,9 @@ class App extends Component {
           {youtubePlayer}
           {ratings}
           {gameInfo}
-           {/* Metacritic Comments */}
-        </SectionWrapper>
-
-        {/* TESTING SECTION Reddit Posts */}
-        <SectionWrapper>
-          <RedditPostsContainer data={this.state.redditPostsData} />
+           {/* Reddit Comments */}
+           <RedditPostsHolder count={10} />
+           <RedditPostsContainer data={this.state.redditPostsData} />
         </SectionWrapper>
       </div>
     );

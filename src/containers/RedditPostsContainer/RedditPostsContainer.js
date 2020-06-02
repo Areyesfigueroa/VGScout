@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import RedditPosts from '../../components/RedditPosts/RedditPosts'
+import RedditPostsHolder from '../../components/RedditPostsHolder/RedditPostsHolder';
 
 class RedditPostsContainer extends Component {
     
@@ -15,6 +16,15 @@ class RedditPostsContainer extends Component {
 
         return (
             this.props.data ? <RedditPosts posts={this.props.data.results}/>:null
+            // <RedditPosts posts={tempPostData}/>
+
+            // <Fragment>
+            //     <RedditPosts posts={tempPostData}/>
+            //     <RedditPosts posts={tempPostData}/>
+            //     <RedditPosts posts={tempPostData}/>
+            //     <RedditPosts posts={tempPostData}/>
+            // </Fragment>
+
         );
     }
 };
