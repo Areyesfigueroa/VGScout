@@ -100,7 +100,6 @@ class App extends Component {
           {ratings}
           {gameInfo}
            {/* Reddit Comments */}
-           <RedditPostsHolder count={10} />
            <RedditPostsContainer data={this.state.redditPostsData} />
         </SectionWrapper>
       </div>

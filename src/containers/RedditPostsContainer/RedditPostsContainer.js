@@ -4,6 +4,15 @@ import RedditPostsHolder from '../../components/RedditPostsHolder/RedditPostsHol
 
 class RedditPostsContainer extends Component {
     
+    state = {
+        showPosts: false
+    }
+
+    togglePosts = () => {
+        let newValue = !this.state.showPosts;
+        this.setState({ showPosts: newValue });
+    }
+
     render() {
         const tempPostData = [{
             id: 0,
@@ -14,17 +23,21 @@ class RedditPostsContainer extends Component {
             text:"<p>csdncsjndcksjndcjknsdkcjnsdjkcnskjdncksjdncjsndckjsndkcjnskdjcnskjdncksjndckjsndcjknsdkcjnsdkjnckjsdnc</p>"
         }];
 
+        let redditPostsHolder = null;
+        let redditPosts = null;
+
+        if(this.props.data) {
+            redditPostsHolder = <RedditPostsHolder show={this.state.showPosts} count={this.props.data.count} clicked={this.togglePosts}/>
+            redditPosts = <RedditPosts posts={this.props.data.results}/>
+        }
+        // redditPostsHolder = <RedditPostsHolder show={this.state.showPosts} count={0} clicked={this.togglePosts}/>
+        // redditPosts = <RedditPosts posts={tempPostData}/>
+
         return (
-            this.props.data ? <RedditPosts posts={this.props.data.results}/>:null
-            // <RedditPosts posts={tempPostData}/>
-
-            // <Fragment>
-            //     <RedditPosts posts={tempPostData}/>
-            //     <RedditPosts posts={tempPostData}/>
-            //     <RedditPosts posts={tempPostData}/>
-            //     <RedditPosts posts={tempPostData}/>
-            // </Fragment>
-
+            <div>
+                {redditPostsHolder}
+                {this.state.showPosts ? redditPosts:null}
+            </div>
         );
     }
 };

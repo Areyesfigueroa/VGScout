@@ -8,7 +8,9 @@ const redditPostsHolder = (props) => {
                 <p>Reddit Posts {props.count}</p>
             </div>
             <div>
-                <p><a className="button">expand</a></p>
+                <p>
+                    <a className="button" onClick={props.clicked}> {props.show ? "X":"expand"} </a>
+                </p>
             </div>
         </div>
     );
