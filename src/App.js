@@ -12,7 +12,7 @@ import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
 //TESTING
-import RedditPostsHolder from "./components/RedditPostsHolder/RedditPostsHolder";
+import RedditPostsHolder from "./components/RedditPosts/RedditPostsMenu/RedditPostsMenu";
 
 //TESTING
 import { loadGameDetails, loadRedditPosts } from "./utils";

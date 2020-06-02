@@ -1,5 +1,7 @@
-.RedditPostsHolder {
+.RedditPostsMenu {
     display: flex;
+    position: sticky;
+    top: 1px;
     justify-content: space-between;
     width: 100%;
     height: auto;
