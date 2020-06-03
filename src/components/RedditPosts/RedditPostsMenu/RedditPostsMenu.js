@@ -37,14 +37,12 @@ class RedditPostsMenu extends Component {
 
     render() {
         return (
-            <div ref={this.element} className={classes.RedditPostsMenu} style={this.bgStyle}>
-                <div>
-                    <p>Reddit Posts {this.props.count}</p>
+            <div ref={this.element} className={classes.RedditPostsMenu} style={this.bgStyle} onClick={this.props.clicked}>
+                <div className={classes.clickable}>
+                    <a href="#redditPostsSection" className="text">Reddit Posts {this.props.count}</a>
                 </div>
-                <div>
-                    <p>
-                        <a className="button" onClick={this.props.clicked}> {this.props.show ? "X":"expand"} </a>
-                    </p>
+                <div className={classes.button}>
+                    <a href="#redditPostsSection" className="button"> {this.props.show ? "X":"expand"} </a>
                 </div>
             </div>
         );

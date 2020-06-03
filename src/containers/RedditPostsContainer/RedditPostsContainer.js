@@ -4,6 +4,8 @@ import RedditPostsMenu from '../../components/RedditPosts/RedditPostsMenu/Reddit
 
 import { loadRedditPosts } from '../../utils';
 
+import ScrollableAnchor from 'react-scrollable-anchor';
+
 class RedditPostsContainer extends Component {
     
     state = {
@@ -28,9 +30,18 @@ class RedditPostsContainer extends Component {
 
     componentDidUpdate(prevProps, prevState) {
 
+        if(prevProps.gameId !== this.props.gameId) {
+            console.log("Game Changed");
+            loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {
+                //Reset
+                console.log(postsData);
+                this.setState({ redditPostsData: postsData });
+            });
+        }
+
         if(prevState.showPosts !== this.state.showPosts) {
             if(this.showPosts) return;
-            this.resetPosts();
+            this.resetCurrPosts();
         }
 
         if(prevState.postsPageNum !== this.state.postsPageNum){
@@ -40,7 +51,6 @@ class RedditPostsContainer extends Component {
                 this.setState({ redditPostsData: newRedditPostsData });
             });    
         }
-
     }
 
     onBottomReached = () => { 
@@ -53,7 +63,7 @@ class RedditPostsContainer extends Component {
         }
     }
 
-    resetPosts = () => {
+    resetCurrPosts = () => {
         let newRedditPostsData = {...this.state.redditPostsData};
         newRedditPostsData.results = newRedditPostsData.results.slice(0,10);
 
@@ -62,20 +72,11 @@ class RedditPostsContainer extends Component {
 
     togglePosts = () => {
         let newValue = !this.state.showPosts;
+
         this.setState({ showPosts: newValue });
     }
 
     render() {
-        // const tempDataObj = {
-        //     id: 0,
-        //     created: "09/16/2020",
-        //     name:"This long title is the title of the post title section.",
-        //     username: "alielreyes",
-        //     url: "www.google.com",
-        //     text:"<p>csdncsjndcksjndcjknsdkcjnsdjkcnskjdncksjdncjsndckjsndkcjnskdjcnskjdncksjndckjsndcjknsdkcjnsdkjnckjsdnc</p>"
-        // }
-        // const tempPostData = [tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj,tempDataObj];
-
         let redditPostsMenu = null;
         let redditPosts = null;
 
@@ -83,14 +84,14 @@ class RedditPostsContainer extends Component {
             redditPostsMenu = <RedditPostsMenu show={this.state.showPosts} count={this.state.redditPostsData.count} clicked={this.togglePosts}/>
             redditPosts = <RedditPosts posts={this.state.redditPostsData.results} />
         }
-        //redditPostsMenu = <RedditPostsMenu show={this.state.showPosts} count={0} clicked={this.togglePosts}/>
-        //redditPosts = <RedditPosts posts={tempPostData} />
 
         return (
-            <div>
-                {redditPostsMenu}
-                {this.state.showPosts ? redditPosts:null}
-            </div>
+            <ScrollableAnchor id={"redditPostsSection"}>
+                <div>
+                    {redditPostsMenu}
+                    {this.state.showPosts && this.state.redditPostsData.results.length > 0 ? redditPosts:null}
+                </div>
+            </ScrollableAnchor>
         );
     }
 };

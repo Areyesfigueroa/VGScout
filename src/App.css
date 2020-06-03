@@ -15,8 +15,15 @@ html {
   color: #4a87ff;
   padding: 15px 10px;
   font-size: 100%;
+  box-sizing: border-box;
 }
 
 .button:hover {
   cursor: pointer;
+}
+
+.text {
+  color: white;
+  text-align: left;
+  text-decoration: none;
 }

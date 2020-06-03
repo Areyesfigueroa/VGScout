@@ -12,7 +12,7 @@ import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
 //TESTING
-import RedditPostsHolder from "./components/RedditPosts/RedditPostsMenu/RedditPostsMenu";
+import RedditPostsMenu from './components/RedditPosts/RedditPostsMenu/RedditPostsMenu';
 
 //TESTING
 import { loadGameDetails, loadRedditPosts } from "./utils";
@@ -103,6 +103,9 @@ class App extends Component {
 
           {/* Reddit Comments */}
           {redditPosts}
+
+          {/* TESTING */}
+          {/* <RedditPostsMenu /> */}
         </SectionWrapper>
       </div>
     );
