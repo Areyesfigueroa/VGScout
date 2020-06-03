@@ -16,8 +16,8 @@ const loadGameDetails = (id) => {
     })
 }
 
-const loadRedditPosts = (id) => {
-    return fetchRedditPosts(id).then(response => {  
+const loadRedditPosts = (id, pageNum=1) => {
+    return fetchRedditPosts(id, pageNum).then(response => {  
         return response;
     }).catch((error) => {
         return error;

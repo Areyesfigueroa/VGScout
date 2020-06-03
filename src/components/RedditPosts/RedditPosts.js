@@ -18,7 +18,6 @@ const redditPosts = (props) => {
             })};
         </div>
     );
-
 };
 
 export default redditPosts;

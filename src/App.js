@@ -28,14 +28,7 @@ class App extends Component {
 
   handleSelectedValue = (newValue) => {
     loadGameDetails(newValue.id).then(gameData => {
-      loadRedditPosts(gameData.id).then(postData => {
-        console.log(gameData);
-        console.log(postData);
-        this.setState({ 
-          selectedValue: gameData,
-          redditPostsData: postData
-        });
-      });
+      this.setState({ selectedValue: gameData });
     });
   }
 
@@ -46,6 +39,7 @@ class App extends Component {
     let youtubePlayer = null;
     let ratings = null;
     let gameInfo = null;
+    let redditPosts = null;
 
     const parsePlatformData = () => {
       let platforms = this.state.selectedValue.platforms ? this.state.selectedValue.platforms: null;
@@ -79,8 +73,15 @@ class App extends Component {
         publishers={this.state.selectedValue.publishers}
         platforms={platformData}
         genres={this.state.selectedValue.genres}
-        />
-      );
+        />);
+
+      redditPosts = (
+        <RedditPostsContainer 
+        data={this.state.redditPostsData} 
+        gameId={this.state.selectedValue.id}/>
+        );
+
+      
     }
 
     return (
@@ -99,8 +100,9 @@ class App extends Component {
           {youtubePlayer}
           {ratings}
           {gameInfo}
-           {/* Reddit Comments */}
-           <RedditPostsContainer data={this.state.redditPostsData} />
+
+          {/* Reddit Comments */}
+          {redditPosts}
         </SectionWrapper>
       </div>
     );

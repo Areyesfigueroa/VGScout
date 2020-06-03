@@ -20,7 +20,7 @@ class RedditPostsMenu extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if(prevState.hightlightBG !== this.state.hightlightBG) {
-            console.log("Change BG");
+            //Change background
             this.bgStyle = this.state.hightlightBG ? { backgroundColor: "rgba(0,0,0,1)" }:null;
         }
     }
