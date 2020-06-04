@@ -67,7 +67,11 @@ class RedditPostsContainer extends Component {
         this.setState({ isLoading: true });
         loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {
             let newRedditPostsData = { ...this.state.redditPostsData };
-            postsData.results.forEach((post) => newRedditPostsData.results.push(post));
+            
+            if(postsData.results.length > 0) {
+                postsData.results.forEach((post) => newRedditPostsData.results.push(post));
+            }
+
             this.setState({
                 redditPostsData: newRedditPostsData,
                 isLoading: false
