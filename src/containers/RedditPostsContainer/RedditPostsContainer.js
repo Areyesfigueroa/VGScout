@@ -32,6 +32,12 @@ class RedditPostsContainer extends Component {
 
         if(prevProps.gameId !== this.props.gameId) {
             console.log("Game Changed - Reset");
+
+            if(this.state.postsPageNum === 1) {
+                console.log("Reset Posts");
+                this.resetRedditPosts();
+            }
+     
             this.setState({ postsPageNum: 1 });
         }
 
@@ -55,10 +61,8 @@ class RedditPostsContainer extends Component {
 
 
     resetRedditPosts = () => {
-        loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {        
-            this.setState({ 
-                redditPostsData: postsData
-            });
+        loadRedditPosts(this.props.gameId, 1).then(postsData => {        
+            this.setState({ redditPostsData: postsData });
         }); 
     }
     appendRedditPosts = () => {
