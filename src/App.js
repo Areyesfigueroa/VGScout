@@ -74,9 +74,7 @@ class App extends Component {
         />);
 
       redditPosts = (
-        <ScrollableAnchor id={"redditPostsSection"}>
           <RedditPostsContainer gameId={this.state.selectedValue.id} />
-        </ScrollableAnchor>
       );
 
 
