@@ -20,8 +20,7 @@ import { loadGameDetails, loadRedditPosts } from "./utils";
 class App extends Component {
 
   state = {
-    selectedValue: null,
-    redditPostsData: null
+    selectedValue: null
   }
 
   clips = null;
@@ -75,11 +74,7 @@ class App extends Component {
         genres={this.state.selectedValue.genres}
         />);
 
-      redditPosts = (
-        <RedditPostsContainer 
-        data={this.state.redditPostsData} 
-        gameId={this.state.selectedValue.id}/>
-        );
+      redditPosts = (<RedditPostsContainer gameId={this.state.selectedValue.id}/>);
 
       
     }

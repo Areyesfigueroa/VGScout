@@ -18,15 +18,8 @@ class RedditPostsMenu extends Component {
         window.removeEventListener('scroll', this.changeBackground);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if(prevState.hightlightBG !== this.state.hightlightBG) {
-            //Change background
-            this.bgStyle = this.state.hightlightBG ? { backgroundColor: "rgba(0,0,0,1)" }:null;
-        }
-    }
-
     changeBackground = (initPos) => {
-        if(initPos >= this.element.current.offsetTop) {
+        if(initPos >= this.element.current.offsetTop && !this.props.show) {
             //Default BG
             this.setState({ hightlightBG: false });
         } else {
@@ -37,7 +30,12 @@ class RedditPostsMenu extends Component {
 
     render() {
         return (
-            <div ref={this.element} className={classes.RedditPostsMenu} style={this.bgStyle} onClick={this.props.clicked}>
+            <div 
+            ref={this.element} 
+            className={classes.RedditPostsMenu} 
+            style={this.state.hightlightBG ? { backgroundColor: "rgba(0,0,0,1)" }:null} 
+            onClick={this.props.clicked}
+            >
                 <div className={classes.clickable}>
                     <a href="#redditPostsSection" className="text">Reddit Posts {this.props.count}</a>
                 </div>

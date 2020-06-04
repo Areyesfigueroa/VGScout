@@ -31,43 +31,62 @@ class RedditPostsContainer extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if(prevProps.gameId !== this.props.gameId) {
-            console.log("Game Changed");
-            loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {
-                //Reset
-                console.log(postsData);
-                this.setState({ redditPostsData: postsData });
-            });
+            console.log("Game Changed - Reset");
+            this.setState({ postsPageNum: 1 });
         }
 
         if(prevState.showPosts !== this.state.showPosts) {
-            if(this.showPosts) return;
-            this.resetCurrPosts();
+            if(this.state.showPosts) return;
+            console.log('Slicing down to 10 comments');
+            this.sliceCurrPosts();
         }
 
-        if(prevState.postsPageNum !== this.state.postsPageNum){
-            loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {
-                let newRedditPostsData = {...this.state.redditPostsData};
-                postsData.results.forEach((post) => newRedditPostsData.results.push(post));        
-                this.setState({ redditPostsData: newRedditPostsData });
-            });    
-        }
-    }
-
-    onBottomReached = () => { 
-        const offset = 80;
-        if ((window.innerHeight + window.scrollY - offset) >= document.body.offsetHeight) {
-            // you're at the bottom of the page
-            //load the reddit posts
-            let newPage= this.state.postsPageNum+1;
-            this.setState({ postsPageNum: newPage });
+        if(prevState.postsPageNum !== this.state.postsPageNum) {
+            if(this.state.postsPageNum > 1) {
+                console.log(this.state.postsPageNum);
+                console.log('Append New 10 new Posts');
+                this.appendRedditPosts();
+            } else {
+                console.log("Reset Posts");
+                this.resetRedditPosts();
+            }
         }
     }
 
-    resetCurrPosts = () => {
+
+    resetRedditPosts = () => {
+        loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {        
+            this.setState({ 
+                redditPostsData: postsData
+            });
+        }); 
+    }
+    appendRedditPosts = () => {
+        loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {
+            let newRedditPostsData = {...this.state.redditPostsData};
+            postsData.results.forEach((post) => newRedditPostsData.results.push(post));        
+            this.setState({ redditPostsData: newRedditPostsData });
+        });  
+    }
+    sliceCurrPosts = () => {
         let newRedditPostsData = {...this.state.redditPostsData};
         newRedditPostsData.results = newRedditPostsData.results.slice(0,10);
 
         this.setState({ redditPostsData: newRedditPostsData });
+    }
+
+    onBottomReached = () => { 
+
+        if(!this.state.showPosts) return;
+
+        const offset = 80;
+        if ((window.innerHeight + window.scrollY - offset) >= document.body.offsetHeight) {
+            // you're at the bottom of the page
+            //load the reddit posts
+            console.log("Bottom Reached - Increment Page");
+            let newPage= this.state.postsPageNum+1;
+            this.setState({ postsPageNum: newPage });
+        }
     }
 
     togglePosts = () => {
