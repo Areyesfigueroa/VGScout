@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import RedditPost from './RedditPost/RedditPost';
 import classes from './RedditPosts.module.css';
 
 const redditPosts = (props) => {
-    return (
-        <div className={classes.RedditPosts}>
-            {props.posts.map((post) => {
-                return (<RedditPost 
+
+    let loadingSpinner = <div style={{color: "white"}}>Loading....</div>;
+    let redditPosts = (<div className={classes.RedditPosts}>
+        {props.posts.map((post) => {
+            return (<RedditPost
                 key={post.id}
                 date={post.created}
                 title={post.name}
@@ -14,9 +15,15 @@ const redditPosts = (props) => {
                 fullPostURL={post.url}
                 img={post.image}
                 content={post.text}
-                />)
-            })};
-        </div>
+            />);
+        })};
+    </div>);
+
+    return (
+        <Fragment>
+            {redditPosts}
+            {props.loading ? loadingSpinner: null}
+        </Fragment>
     );
 };
 

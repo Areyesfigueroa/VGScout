@@ -11,7 +11,8 @@ class RedditPostsContainer extends Component {
     state = {
         redditPostsData: null,
         postsPageNum: 1,
-        showPosts: false
+        showPosts: false,
+        isLoading: false
     }
 
     componentDidMount() {
@@ -66,10 +67,14 @@ class RedditPostsContainer extends Component {
         }); 
     }
     appendRedditPosts = () => {
+        this.setState({ isLoading: true });
         loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postsData => {
             let newRedditPostsData = {...this.state.redditPostsData};
             postsData.results.forEach((post) => newRedditPostsData.results.push(post));        
-            this.setState({ redditPostsData: newRedditPostsData });
+            this.setState({ 
+                redditPostsData: newRedditPostsData,
+                isLoading: false 
+            });
         });  
     }
     sliceCurrPosts = () => {
@@ -105,7 +110,7 @@ class RedditPostsContainer extends Component {
 
         if(this.state.redditPostsData) {
             redditPostsMenu = <RedditPostsMenu show={this.state.showPosts} count={this.state.redditPostsData.count} clicked={this.togglePosts}/>
-            redditPosts = <RedditPosts posts={this.state.redditPostsData.results} />
+            redditPosts = <RedditPosts posts={this.state.redditPostsData.results} loading={ this.state.isLoading }/>
         }
 
         return (
