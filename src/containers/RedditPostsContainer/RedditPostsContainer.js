@@ -85,8 +85,7 @@ class RedditPostsContainer extends Component {
     }
 
     onBottomReached = () => { 
-
-        if(!this.state.showPosts) return;
+        if(!this.state.showPosts || this.state.isLoading) return;
 
         const offset = 80;
         if ((window.innerHeight + window.scrollY - offset) >= document.body.offsetHeight) {
@@ -114,7 +113,7 @@ class RedditPostsContainer extends Component {
         }
 
         return (
-            <ScrollableAnchor id={"redditPostsSection"}>
+            <ScrollableAnchor id={"redditPostsSection"} offset={'10px'}>
                 <div>
                     {redditPostsMenu}
                     {this.state.showPosts && this.state.redditPostsData.results.length > 0 ? redditPosts:null}
