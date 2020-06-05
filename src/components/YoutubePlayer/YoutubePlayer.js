@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './YoutubePlayer.module.css';
-
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const youtubePlayer = (props) => {
     let video = null;
@@ -23,7 +23,7 @@ const youtubePlayer = (props) => {
 
     return (
         <div className={classes.YoutubePlayer}>
-            {video}
+            {video ? video: <LoadingSpinner />}
         </div>
     );
 }

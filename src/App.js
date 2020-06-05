@@ -11,22 +11,25 @@ import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer";
 import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 
-//TESTING
 import { loadGameDetails } from "./utils";
-import ScrollableAnchor from 'react-scrollable-anchor';
 
+//TESTING
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
 class App extends Component {
 
   state = {
-    selectedValue: null
+    selectedValue: null,
+    isLoading: false
   }
 
   clips = null;
 
   handleSelectedValue = (newValue) => {
+    this.setState({ isLoading: true });
     loadGameDetails(newValue.id).then(gameData => {
       this.setState({ selectedValue: gameData });
+      this.setState({ isLoading: false });
     });
   }
 
@@ -76,8 +79,6 @@ class App extends Component {
       redditPosts = (
           <RedditPostsContainer gameId={this.state.selectedValue.id} />
       );
-
-
     }
 
     return (
@@ -100,6 +101,7 @@ class App extends Component {
           {/* Reddit Comments */}
           {redditPosts}
         </SectionWrapper>
+        { this.state.isLoading ? <LoadingSpinner style={{ marginTop: "100px" }}/>: null}
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import RedditPost from './RedditPost/RedditPost';
 import classes from './RedditPosts.module.css';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const redditPosts = (props) => {
 
-    let loadingSpinner = <div style={{color: "white"}}>Loading....</div>;
     let redditPosts = (<div className={classes.RedditPosts}>
         {props.posts.map((post) => {
             return (<RedditPost
@@ -22,7 +22,7 @@ const redditPosts = (props) => {
     return (
         <Fragment>
             {redditPosts}
-            {props.loading ? loadingSpinner: null}
+            {props.loading ? <LoadingSpinner />:null}
         </Fragment>
     );
 };

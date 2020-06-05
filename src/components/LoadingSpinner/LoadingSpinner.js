@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './LoadingSpinner.module.css';
 
-const loadingSpinner = () => {
+const loadingSpinner = (props) => {
     return (
-        <div className={classes.LoadingSpinner}>
-            Loading...
+        <div className={classes.LoadingSpinner} style={props.style}>
+            <div className={classes.ldsRoller}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     );
 };
