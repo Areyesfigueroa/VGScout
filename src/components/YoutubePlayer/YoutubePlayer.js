@@ -16,7 +16,7 @@ const youtubePlayer = (props) => {
     } else {
         video = (
             <div>
-                <p>No Video Found... :(</p>
+                <p>No Video Found :(</p>
             </div>
         );
     }

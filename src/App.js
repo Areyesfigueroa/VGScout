@@ -51,6 +51,7 @@ class App extends Component {
 
     //Once we have the game data loaded.
     if (this.state.selectedValue !== null) {
+      console.log(this.state.selectedValue);
       let platformData = parsePlatformData();
       bgImage = this.state.selectedValue.background_image;
 
@@ -64,8 +65,7 @@ class App extends Component {
       ratings = (
         <Ratings
           metacritic={this.state.selectedValue.metacritic}
-          ign={8}
-          gamespot={4.5}
+          ratings={this.state.selectedValue.ratings}
         />
       );
 

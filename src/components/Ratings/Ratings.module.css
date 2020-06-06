@@ -1,6 +1,6 @@
 .Ratings {
     width: 100%;
-    height: 50px;
+    height: 60px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -15,12 +15,18 @@
 
 .Ratings div {
     width: 100px;
-    height: inherit;
+    height: 50px;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .Ratings div img {
     width: 50px;
     height: inherit;
+}
+
+.Ratings div ion-icon {
+    width: 50px;
+    height: 30px;
 }
