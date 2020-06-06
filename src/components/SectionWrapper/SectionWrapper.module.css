@@ -1,4 +1,11 @@
 .SectionWrapper {
-    margin-bottom: 10px;
-    box-sizing: border-box;
+    padding: 0 10%;
+    margin-bottom: 20px;
+}
+
+/* DESKTOP */
+@media only screen and (min-width: 900px) {
+    .SectionWrapper {
+        padding: 0 15%;
+    }
 }

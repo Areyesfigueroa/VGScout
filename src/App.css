@@ -1,5 +1,5 @@
 .App {
-  margin:0 10%;
+  margin:0;
   padding: 0;
 }
 
@@ -26,4 +26,14 @@ html {
   color: white;
   text-align: left;
   text-decoration: none;
+}
+
+/* VENDOR */
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
 }

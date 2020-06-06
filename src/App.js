@@ -10,6 +10,8 @@ import ShadowBoxGradient from "./components/ShadowBoxGradient/ShadowBoxGradient"
 import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer";
 import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
+import Particles from 'react-particles-js';
+
 
 import { loadGameDetails } from "./utils";
 
@@ -36,7 +38,7 @@ class App extends Component {
   render() {
 
     //Default Values
-    let bgImage = require("./assets/background-default.png");
+    let bgImage = null;
     let youtubePlayer = null;
     let ratings = null;
     let gameInfo = null;
@@ -77,13 +79,35 @@ class App extends Component {
         />);
 
       redditPosts = (
-          <RedditPostsContainer gameId={this.state.selectedValue.id} />
+        <RedditPostsContainer gameId={this.state.selectedValue.id} />
       );
     }
 
     return (
       <div className="App">
         <ShadowBoxGradient degree={0} fromOpacity={0.2} toOpacity={0.9} />
+
+        <Particles
+          params={{
+            "particles": {
+              "number": {
+                "value": 50
+              },
+              "size": {
+                "value": 3
+              }
+            },
+            "interactivity": {
+              "events": {
+                "onhover": {
+                  "enable": true,
+                  "mode": "repulse"
+                }
+              }
+            }
+          }} />
+        <Background image={bgImage} />
+
         <SectionWrapper>
           <SearchBarContainer
             selectedValue={this.handleSelectedValue}
@@ -91,8 +115,6 @@ class App extends Component {
             searchDelay={0.2} />
         </SectionWrapper>
 
-        {/* If there is a selection */}
-        <Background image={bgImage} />
         <SectionWrapper>
           {youtubePlayer}
           {ratings}
@@ -101,7 +123,8 @@ class App extends Component {
           {/* Reddit Comments */}
           {redditPosts}
         </SectionWrapper>
-        { this.state.isLoading ? <LoadingSpinner style={{ marginTop: "100px" }}/>: null}
+        {this.state.isLoading ? <LoadingSpinner style={{ marginTop: "100px" }} /> : null}
+
       </div>
     );
   }

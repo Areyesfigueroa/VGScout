@@ -92,7 +92,7 @@ class RedditPostsContainer extends Component {
     onBottomReached = () => {
         if (!this.state.showPosts || this.state.isLoading) return;
 
-        const offset = 80;
+        const offset = 0;
         if ((window.innerHeight + window.scrollY - offset) >= document.body.offsetHeight) {
             // you're at the bottom of the page
             //load the reddit posts
