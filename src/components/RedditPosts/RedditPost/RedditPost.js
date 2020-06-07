@@ -27,10 +27,10 @@ class RedditPost extends Component {
                 </div>
                 <h4>{this.props.title}</h4>
                 <div className={`${classes.postContent} ${this.state.collapse ? classes.collapse:null}`}>
-                    {this.props.img ? <img src={this.props.img} alt="reddit image"/>:null}
+                    {this.props.img ? <img src={this.props.img} alt="reddit"/>:null}
                     <div dangerouslySetInnerHTML={{__html: this.props.content}}></div>
                 </div>
-                <a className={"button"} onClick={this.toggleCollapse}>{this.state.collapse ? "more":"less"}</a>
+                <button className={"button"} onClick={this.toggleCollapse}>{this.state.collapse ? "more":"less"}</button>
             </div>
         );
     }

@@ -68,8 +68,8 @@ class SearchBarContainer extends Component {
 
         if(this.state.searchValue.length > 0) {
             //API Query
-            loadSuggestions(this.state.searchValue, this.getSuggestionCount(1, 5)).
-            then(results => {
+            loadSuggestions(this.state.searchValue, this.getSuggestionCount(1, 5))
+            .then(results => {
                 this.setState({ 
                     suggestions: results.length > 0 ? results:null,
                     selection: results.length > 0 ? results[0]:null

@@ -10,12 +10,14 @@ html {
 .button {
   width: auto;
   height: auto;
-  background-color: none;
+  background-color: transparent;
+  border: 0;
   text-align: center;
   color: #4a87ff;
   padding: 15px 10px;
   font-size: 100%;
   box-sizing: border-box;
+  outline: none;
 }
 
 .button:hover {
