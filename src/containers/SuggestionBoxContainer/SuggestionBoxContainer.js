@@ -54,10 +54,10 @@ class SuggestionsBoxContainer extends Component {
         if(!event.target) return;
         const elementID = parseInt(event.target.closest("div").id);
         if(this.state.selectedID === elementID) {
-            console.log("Confirm Selection");
+            // console.log("Confirm Selection");
             this.props.confirmSelection();
         } else {
-            console.log("Update Selection");
+            // console.log("Update Selection");
             this.setState({ selectedID: elementID });
         }
     }

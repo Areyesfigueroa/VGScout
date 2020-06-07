@@ -81,7 +81,7 @@ class RedditPostsContainer extends Component {
     sliceCurrPosts = () => {
         if (this.state.redditPostsData.results.length <= 0) return;
 
-        console.log('Slicing down to 10 comments');
+        // console.log('Slicing down to 10 comments');
 
         let newRedditPostsData = { ...this.state.redditPostsData };
         newRedditPostsData.results = newRedditPostsData.results.slice(0, 10);
