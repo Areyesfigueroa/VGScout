@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import SuggestionsBox from "../../components/SuggestionsBox/SuggestionsBox";
 
+/**
+ * If the item is selected already and I click on it
+ * confirm selection.
+ * 
+ * Identify the selectedItem
+ * 
+ */
+
+
 class SuggestionsBoxContainer extends Component {
 
     state = {
@@ -43,7 +52,14 @@ class SuggestionsBoxContainer extends Component {
 
     navClickSelection = (event) => {
         if(!event.target) return;
-        this.setState({ selectedID: parseInt(event.target.closest("div").id) });
+        const elementID = parseInt(event.target.closest("div").id);
+        if(this.state.selectedID === elementID) {
+            console.log("Confirm Selection");
+            this.props.confirmSelection();
+        } else {
+            console.log("Update Selection");
+            this.setState({ selectedID: elementID });
+        }
     }
 
     //Handle the hightlighted selection.

@@ -89,9 +89,8 @@ class SearchBarContainer extends Component {
     render() {
 
         return (
-            <div onKeyDown={(event) => event.key === 'Enter' ? this.confirmSelection():null}
-            // onMouseDown={(event) => event.button === 0 ? this.confirmSelection():null}
-            >
+            <div onKeyDown={(event) => event.key === 'Enter' ? this.confirmSelection():null}>
+            
                 <SearchBar 
                 searchRef={this.searchInput}
                 search={this.handleSearch} 

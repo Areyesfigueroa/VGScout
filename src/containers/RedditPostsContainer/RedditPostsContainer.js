@@ -16,7 +16,7 @@ class RedditPostsContainer extends Component {
     componentDidMount() {
 
         loadRedditPosts(this.props.gameId, this.state.postsPageNum).then(postData => {
-            console.log(postData);
+            //console.log(postData);
             this.setState({ redditPostsData: postData });
         });
 
@@ -30,10 +30,10 @@ class RedditPostsContainer extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.gameId !== this.props.gameId) {
-            console.log("Game Changed - Reset");
+            //console.log("Game Changed - Reset");
 
             if (this.state.postsPageNum === 1) {
-                console.log("Reset Posts");
+                //console.log("Reset Posts");
                 this.resetRedditPosts();
             }
 
@@ -47,11 +47,11 @@ class RedditPostsContainer extends Component {
 
         if (prevState.postsPageNum !== this.state.postsPageNum) {
             if (this.state.postsPageNum > 1) {
-                console.log(this.state.postsPageNum);
-                console.log('Append New 10 new Posts');
+                //console.log(this.state.postsPageNum);
+                //console.log('Append New 10 new Posts');
                 this.appendRedditPosts();
             } else {
-                console.log("Reset Posts");
+                //console.log("Reset Posts");
                 this.resetRedditPosts();
             }
         }
@@ -96,7 +96,7 @@ class RedditPostsContainer extends Component {
         if ((window.innerHeight + window.scrollY - offset) >= document.body.offsetHeight) {
             // you're at the bottom of the page
             //load the reddit posts
-            console.log("Bottom Reached - Increment Page");
+            //console.log("Bottom Reached - Increment Page");
             let newPage = this.state.postsPageNum + 1;
             this.setState({ postsPageNum: newPage });
         }

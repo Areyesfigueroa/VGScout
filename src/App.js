@@ -51,7 +51,7 @@ class App extends Component {
 
     //Once we have the game data loaded.
     if (this.state.selectedValue !== null) {
-      console.log(this.state.selectedValue);
+      // console.log(this.state.selectedValue);
       let platformData = parsePlatformData();
       bgImage = this.state.selectedValue.background_image;
 
