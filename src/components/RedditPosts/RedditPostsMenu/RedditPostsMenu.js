@@ -8,7 +8,7 @@ const redditPostsMenu = (props) => {
         <ScrollableAnchor id={"redditPostsSection"}>
             <div
                 className={classes.RedditPostsMenu}
-                style={props.show ? { backgroundColor: "rgba(0,0,0,1)" } : null}
+                style={props.show ? { backgroundColor: "#333A41" } : null}
                 onClick={props.clicked}
             >
                 <div className={classes.clickable}>

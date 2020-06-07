@@ -1,0 +1,22 @@
+.Logo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    color: white;
+    background-color: transparent;
+    justify-content: center;
+}
+
+.Logo img {
+    width: 100px;
+    height: auto;
+    padding: 70px 10px;
+}
+
+.Logo h1 {
+    padding: 0 30px;
+    font-size: 2em;
+    margin: auto 0;
+}
+

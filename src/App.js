@@ -11,6 +11,7 @@ import YoutubePlayer from "./components/YoutubePlayer/YoutubePlayer";
 import Ratings from "./components/Ratings/Ratings";
 import GameInfo from "./components/GameInfo/GameInfo";
 import Particles from 'react-particles-js';
+import Logo from './components/Logo/Logo';
 
 
 import { loadGameDetails } from "./utils";
@@ -107,8 +108,9 @@ class App extends Component {
             }
           }} />
         <Background image={bgImage} />
-
+        
         <SectionWrapper>
+          <Logo />
           <SearchBarContainer
             selectedValue={this.handleSelectedValue}
             suggestionCount={3}
