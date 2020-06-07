@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "83d9977b0e29318c216a951e92af8050",
+    "revision": "c25e5a62e9f2d78169d69f8f83b71606",
     "url": "/index.html"
   },
   {
-    "revision": "dcbf99cd1fd1fc07b6e7",
+    "revision": "daa9a5b8e0b93583091a",
     "url": "/static/css/main.acbabc70.chunk.css"
   },
   {
@@ -16,16 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.a9fc9e39.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dcbf99cd1fd1fc07b6e7",
-    "url": "/static/js/main.fe464061.chunk.js"
+    "revision": "daa9a5b8e0b93583091a",
+    "url": "/static/js/main.9dd7e442.chunk.js"
   },
   {
     "revision": "9fbe1af2e62bed746c20",
     "url": "/static/js/runtime-main.a5973e76.js"
   },
   {
-    "revision": "fe645a6cb514e7f23c422df2d27c9b46",
-    "url": "/static/media/logo.fe645a6c.jpg"
+    "revision": "dbea199294fa69fccd5bcd176cccc125",
+    "url": "/static/media/VGS_Logo_01.dbea1992.png"
   },
   {
     "revision": "fb96c428359bdc475712c321f4378dbf",
