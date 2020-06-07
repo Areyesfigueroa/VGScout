@@ -67,7 +67,8 @@ class SuggestionsBoxContainer extends Component {
         if(this.state.selectedID === id){
             return { 
                 backgroundColor: "rgba(128, 205, 250, 0.5)",
-                fontWeight: "bold" 
+                fontWeight: "bold",
+                color: "white"
             };
         } else {
             return {

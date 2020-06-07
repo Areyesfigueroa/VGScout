@@ -13,6 +13,7 @@
 .SuggestionItem:hover,
 .SuggestionItem:active {
     background-color: cadetblue;
+    cursor: pointer;
 }
 
 .active {

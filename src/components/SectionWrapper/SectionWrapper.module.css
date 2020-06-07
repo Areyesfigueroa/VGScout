@@ -1,6 +1,9 @@
 .SectionWrapper {
-    padding: 0 10%;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
     margin-bottom: 20px;
+    padding: 0 10%;
 }
 
 /* DESKTOP */
