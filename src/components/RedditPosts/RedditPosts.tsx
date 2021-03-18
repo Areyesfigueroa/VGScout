@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import RedditPost from './RedditPost/RedditPost';
 import classes from './RedditPosts.module.css';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 const redditPosts = (props) => {
 
