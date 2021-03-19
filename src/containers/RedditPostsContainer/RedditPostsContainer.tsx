@@ -3,7 +3,9 @@ import RedditPosts from '../../components/RedditPosts/RedditPosts'
 import RedditPostsMenu from '../../components/RedditPosts/RedditPostsMenu/RedditPostsMenu';
 
 import { loadRedditPosts } from '../../utils';
-
+interface Props {
+    gameId: string;
+}
 class RedditPostsContainer extends Component {
 
     state = {

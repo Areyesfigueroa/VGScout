@@ -13,22 +13,40 @@ import GameInfo from "./components/GameInfo/GameInfo";
 import Particles from 'react-particles-js';
 import Logo from './components/Logo/Logo';
 
-
 import { loadGameDetails } from "./utils";
 
 //TESTING
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 
+interface Platform {
+  platform: string;
+};
+interface AppState {
+  selectedValue: {
+    id: string;
+    platforms: Array<Platform>;
+    background_image: string;
+    clip: { video: string };
+    metacritic: number;
+    ratings: object;
+    description: string;
+    developers: object[];
+    publishers: object[];
+    genres: object[];
+  } | null;
+  isLoading: boolean;
+}
+
 class App extends Component {
 
-  state = {
+  state: AppState = {
     selectedValue: null,
     isLoading: false
   }
 
   clips = null;
 
-  handleSelectedValue = (newValue) => {
+  handleSelectedValue = (newValue: {id: string | null}) => {
     this.setState({ isLoading: true });
     loadGameDetails(newValue.id).then(gameData => {
       this.setState({ selectedValue: gameData });
@@ -46,8 +64,10 @@ class App extends Component {
     let redditPosts = null;
 
     const parsePlatformData = () => {
-      let platforms = this.state.selectedValue.platforms ? this.state.selectedValue.platforms : null;
-      return platforms ? platforms.map(platformObj => platformObj.platform) : null;
+      if(!this.state.selectedValue) return;
+ 
+      let platforms: Array<Platform> | null = this.state.selectedValue.platforms ? this.state.selectedValue.platforms : null;
+      return platforms ? platforms.map((platformObj) => platformObj.platform) : null;
     }
 
     //Once we have the game data loaded.
@@ -62,7 +82,6 @@ class App extends Component {
         />
       );
 
-      //TODO, Find replacements for IGN and gamespot.
       ratings = (
         <Ratings
           metacritic={this.state.selectedValue.metacritic}

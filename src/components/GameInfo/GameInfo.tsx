@@ -4,7 +4,14 @@ import classes from "./GameInfo.module.css";
 import SummaryContainer from '../../containers/SummaryContainer/SummaryContainer';
 import InfoBox from "./InfoBox/InfoBox";
 
-const gameInfo = (props) => {
+interface Props {
+    summary: string;
+    developers: object[];
+    publishers: object[];
+    platforms: string[] | null | undefined;
+    genres: object[];
+};
+const gameInfo: React.FC<Props> = (props) => {
 
 
     return (
