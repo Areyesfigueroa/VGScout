@@ -4,8 +4,12 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import SuggestionsBoxContainer from '../SuggestionBoxContainer/SuggestionBoxContainer';
 import { loadSuggestions, addDelay } from "../../utils";
 
-
-class SearchBarContainer extends Component {
+interface Props {
+    selectedValue: (newValue: {id: string}) => void;
+    suggestionCount: number;
+    searchDelay: number;
+}
+class SearchBarContainer extends Component<Props> {
 
     state = {
         searchValue: '',
@@ -16,7 +20,7 @@ class SearchBarContainer extends Component {
     }
 
     searchInput = React.createRef();
-    timerID = null;
+    timerID:NodeJS.Timeout | null = null;
 
     componentDidUpdate(prevProps, prevState) {
         if(this.state.searchValue !== prevState.searchValue) {

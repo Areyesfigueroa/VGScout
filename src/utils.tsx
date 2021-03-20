@@ -1,30 +1,30 @@
 import { fetchGameDetails, queryGameData, fetchRedditPosts } from './http';
 
-const loadSuggestions = (query, length) => {
-    return queryGameData(query, length).then(response => {  
+const loadSuggestions = (query: string, length: number): Promise<Array<object>> => {
+    return queryGameData(query, length).then((response: { results: any }): Promise<any> => {  
         return response.results;
-    }).catch((error) => {
+    }).catch((error: object): object => {
         return error;
     })
 }
 
-const loadGameDetails = (id) => {
-    return fetchGameDetails(id).then(response => {
+const loadGameDetails = (id: string): Promise<object> => {
+    return fetchGameDetails(id).then((response) => {
         return response;
-    }).catch(error => {
-        console.log(error);
+    }).catch((error: object): object => {
+        return error;
     })
 }
 
-const loadRedditPosts = (id, pageNum=1) => {
+const loadRedditPosts = (id: string, pageNum: number=1): Promise<object> => {
     return fetchRedditPosts(id, pageNum).then(response => {  
         return response;
-    }).catch((error) => {
+    }).catch((error: object): object => {
         return error;
     })
 }
 
-const addDelay = (delayTime, callback, timerID=null) => {
+const addDelay = (delayTime: number, callback: () => void, timerID:NodeJS.Timeout|null=null): NodeJS.Timeout => {
     if(timerID) {
         clearTimeout(timerID);
     }

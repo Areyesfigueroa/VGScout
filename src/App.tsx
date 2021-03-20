@@ -21,7 +21,7 @@ import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 interface Platform {
   platform: string;
 };
-interface AppState {
+interface State {
   selectedValue: {
     id: string;
     platforms: Array<Platform>;
@@ -39,15 +39,16 @@ interface AppState {
 
 class App extends Component {
 
-  state: AppState = {
+  state: State = {
     selectedValue: null,
     isLoading: false
   }
 
   clips = null;
 
-  handleSelectedValue = (newValue: {id: string | null}) => {
+  handleSelectedValue = (newValue: {id: string}) => {
     this.setState({ isLoading: true });
+    // if(!newValue.id) return;
     loadGameDetails(newValue.id).then(gameData => {
       this.setState({ selectedValue: gameData });
       this.setState({ isLoading: false });

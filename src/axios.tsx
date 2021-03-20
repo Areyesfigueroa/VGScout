@@ -8,7 +8,7 @@ const instance = axios.create({
     }
 });
 
-instance.interceptors.request.use(request => {
+instance.interceptors.request.use((request:object): object => {
     //console.log(request);
     return request;
 });

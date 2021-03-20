@@ -1,6 +1,6 @@
 import axios from './axios';
 
-const fetchGameDetails = (id) => {
+const fetchGameDetails = (id:string): Promise<any> => {
 
     //API Query
     return axios.get(`/games/${id}`)
@@ -11,7 +11,7 @@ const fetchGameDetails = (id) => {
     });
 }
 
-const fetchRedditPosts = (id, pageNum) => {
+const fetchRedditPosts = (id:string, pageNum:number): Promise<any> => {
     //API Query
     return axios.get(`/games/${id}/reddit?page=${pageNum}`)
     .then(response => {
@@ -21,7 +21,7 @@ const fetchRedditPosts = (id, pageNum) => {
     });
 }
 
-const queryGameData = (query, length) => {
+const queryGameData = (query: string, length: number): Promise<any> => {
 
     //API Query
     return axios.get(`/games?search=${query}&page_size=${length}`)
