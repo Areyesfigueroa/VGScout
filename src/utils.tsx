@@ -15,8 +15,11 @@ const loadGameDetails = (id: string): Promise<object> => {
         return error;
     })
 }
-
-const loadRedditPosts = (id: string, pageNum: number=1): Promise<object> => {
+interface RedditPosts {
+    results: Array<object>;
+    count: number;
+}
+const loadRedditPosts = (id: string, pageNum: number=1): Promise<RedditPosts> => {
     return fetchRedditPosts(id, pageNum).then(response => {  
         return response;
     }).catch((error: object): object => {
