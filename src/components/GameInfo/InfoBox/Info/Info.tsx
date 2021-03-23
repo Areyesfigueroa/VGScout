@@ -1,6 +1,10 @@
 import React from 'react';
+import { JsxElement } from 'typescript';
 
-const info: React.FC = (props) => {
+interface Props {
+    data: any[];
+}
+const info: React.FC<Props> = (props) => {
     return props.data.map((info, i) => {
         return (
             <li key={i}>{info.name}</li>

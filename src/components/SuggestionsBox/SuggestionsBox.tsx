@@ -1,8 +1,14 @@
-import React from "react";
 import classes from "./SuggestionsBox.module.css";
 import SuggestionItems from "./SuggestionItems/SuggestionItems";
 
-const suggestionsBox = (props) => {
+interface Props {
+    data: any;
+    clicked: any;
+    styleSelection: any;
+    navSelection: any;
+    suggestionBoxRef?: any;
+};
+const suggestionsBox: React.FC<Props> = (props) => {
 
     return (
     <div className={classes.SuggestionsBox} ref={props.suggestionBoxRef}>

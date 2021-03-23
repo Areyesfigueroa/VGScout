@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import SuggestionsBox from "../../components/SuggestionsBox/SuggestionsBox";
 
 /**
@@ -9,10 +9,20 @@ import SuggestionsBox from "../../components/SuggestionsBox/SuggestionsBox";
  * 
  */
 
+interface Props {
+    searchInput: {current: HTMLInputElement};
+    data: object[];
+    updateSelection: (selectedID: number) => void;
+    confirmSelection: () => void;
+}
 
-class SuggestionsBoxContainer extends Component {
+interface State {
+    selectedID: number;
+}
 
-    state = {
+class SuggestionsBoxContainer extends Component<Props> {
+
+    state: State = {
         selectedID: 0
     }
     
@@ -24,13 +34,13 @@ class SuggestionsBoxContainer extends Component {
         this.props.searchInput.current.removeEventListener("keydown", this.navArrowSelection);
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: Props, prevState: State) {
         if(prevState.selectedID !== this.state.selectedID) {
             this.props.updateSelection(this.state.selectedID);
         }
     }
 
-    navArrowSelection = (event) => {
+    navArrowSelection = (event: any) => {
         if(!event.target.closest("div")) return;
 
         let id = this.state.selectedID;
@@ -50,7 +60,7 @@ class SuggestionsBoxContainer extends Component {
         }
     }
 
-    navClickSelection = (event) => {
+    navClickSelection = (event: any) => {
         if(!event.target) return;
         const elementID = parseInt(event.target.closest("div").id);
         if(this.state.selectedID === elementID) {
@@ -63,7 +73,7 @@ class SuggestionsBoxContainer extends Component {
     }
 
     //Handle the hightlighted selection.
-    styleSelection = (id) => {
+    styleSelection = (id: number) => {
         if(this.state.selectedID === id){
             return { 
                 backgroundColor: "rgba(128, 205, 250, 0.5)",

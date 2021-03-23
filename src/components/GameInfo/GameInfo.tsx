@@ -8,7 +8,7 @@ interface Props {
     summary: string;
     developers: object[];
     publishers: object[];
-    platforms: string[] | null | undefined;
+    platforms: any;
     genres: object[];
 };
 const gameInfo: React.FC<Props> = (props) => {

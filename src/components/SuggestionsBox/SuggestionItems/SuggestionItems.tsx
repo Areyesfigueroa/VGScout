@@ -1,9 +1,20 @@
-import React from "react";
 import SuggestionItem from "./SuggestionItem/SuggestionItem";
 
-const suggestionItems = (props) => {
+interface Suggestion {
+    id: any;
+    short_screenshots: any;
+    name: any;
+};
 
-    return props.data.map((suggestion, idx) => {
+interface Props {
+    data: any;
+    clicked: any;
+    navSelection: any;
+    styleSelection: any;
+};
+const suggestionItems: React.FC<Props> = (props) => {
+
+    return props.data.map((suggestion: Suggestion, idx: number) => {
         return (
             <SuggestionItem
             key={suggestion.id}

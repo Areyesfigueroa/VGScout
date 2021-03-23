@@ -5,33 +5,38 @@ import SuggestionsBoxContainer from '../SuggestionBoxContainer/SuggestionBoxCont
 import { loadSuggestions, addDelay } from "../../utils";
 
 interface Props {
-    selectedValue: (newValue: {id: string}) => void;
+    selectedValue: (newValue: {id: any}) => void;
     suggestionCount: number;
     searchDelay: number;
 }
+interface State {
+    searchValue: string;
+    prevSearchValue: string;
+    prevSelection: string;
+    selection: any;
+    suggestions: any;
+}
 class SearchBarContainer extends Component<Props> {
 
-    state = {
+    state: State = {
         searchValue: '',
         prevSearchValue: '',
         prevSelection: '',
         selection: null,
-        suggestions: null
+        suggestions: []
     }
 
-    searchInput = React.createRef();
+    searchInput:any = React.createRef<HTMLInputElement>();
     timerID:NodeJS.Timeout | null = null;
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: Props, prevState: State) {
         if(this.state.searchValue !== prevState.searchValue) {
             this.search();
         }
     }
 
-    displaySelection = (selectionIdx) => {
-        if(!this.state.suggestions) return;
-
-        let result = this.state.suggestions[selectionIdx];
+    displaySelection = (selectionIdx: number) => {
+        let result: {name: string} = this.state.suggestions[selectionIdx];
         this.searchInput.current.value = result.name;
         this.setState({
             selection: result
@@ -45,7 +50,7 @@ class SearchBarContainer extends Component<Props> {
         this.setState({ suggestions: null });
     }
 
-    handleSearch = (newSearchValue) => {
+    handleSearch = (newSearchValue: any) => {
        const callback = () => this.setState({ searchValue: newSearchValue });
        const delayTime = this.props.searchDelay * 1000;
        
@@ -60,7 +65,7 @@ class SearchBarContainer extends Component<Props> {
         });
     }
 
-    getSuggestionCount(min, max) {
+    getSuggestionCount(min: number, max: number) {
         if(this.props.suggestionCount > max) return max;
         if(this.props.suggestionCount < min) return min;
 
@@ -93,7 +98,7 @@ class SearchBarContainer extends Component<Props> {
     render() {
 
         return (
-            <div onKeyDown={(event) => event.key === 'Enter' ? this.confirmSelection():null}>
+            <div onKeyDown={(event: any) => event.key === 'Enter' ? this.confirmSelection():null}>
             
                 <SearchBar 
                 searchRef={this.searchInput}

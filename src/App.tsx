@@ -127,7 +127,7 @@ class App extends Component {
               }
             }
           }} />
-        <Background image={bgImage} />
+        {bgImage ? <Background image={bgImage} />: null}
         
         <SectionWrapper>
           <Logo />

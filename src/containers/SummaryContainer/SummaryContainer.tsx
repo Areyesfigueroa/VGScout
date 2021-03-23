@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Summary from '../../components/GameInfo/Summary/Summary';
 
-class SummaryContainer extends Component {
+interface Props {
+    data: string;
+}
+
+interface State {
+    expand: boolean;
+}
+class SummaryContainer extends Component<Props> {
    
-    state = {
+    state: State = {
         expand: false
     }
    

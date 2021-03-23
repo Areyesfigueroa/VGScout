@@ -2,7 +2,12 @@ import React from 'react';
 import classes from './InfoBox.module.css';
 import Info from './Info/Info';
 
-const infoBox: React.FC = (props) => {
+
+interface Props {
+    title: string;
+    data: any[];
+}
+const infoBox: React.FC<Props> = (props) => {
     return (
         <div className={classes.InfoBox}>
             <h4>{props.title}</h4>
