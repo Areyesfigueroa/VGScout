@@ -1,4 +1,4 @@
-# VGScount - Video Game Scout
+# VGScout - Video Game Scout
 
 ## Description
 Allows users to search any video games and get essential information such as Metacritic reviews, descriptions, gameplay preview, community posts and more.
