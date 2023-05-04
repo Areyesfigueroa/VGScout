@@ -1,16 +1,14 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: "https://rawg-video-games-database.p.rapidapi.com",
-	headers: {
-		"x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
-		"x-rapidapi-key": "a5e3fb3ebcmsh203426ca241b46ep1630eejsn0f17cd94c4f4"
-    }
-});
+  baseURL: 'https://api.rawg.io/api',
+  params: {
+    key: process.env.REACT_APP_API_KEY
+  }
+})
 
-instance.interceptors.request.use(request => {
-    //console.log(request);
-    return request;
-});
+instance.interceptors.request.use((request) => {
+  return request
+})
 
-export default instance;
+export default instance
